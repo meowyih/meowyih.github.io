@@ -7,21 +7,19 @@ window.onload = function() {
 	var query_string = {};
     var query = window.location.search.substring(1);
     var vars = query.split("&");
-    for (var i = 0; i < vars.length; i++)
-    {
+    for (var i = 0; i < vars.length; i++) {
         var pair = vars[i].split("=");
         // If first entry with this name
-        if (typeof query_string[pair[0]] === "undefined")
-        {
+        if (typeof query_string[pair[0]] === "undefined") {
             query_string[pair[0]] = pair[1];
             // If second entry with this name
-        } else if (typeof query_string[pair[0]] === "string")
-        {
+        } 
+		else if (typeof query_string[pair[0]] === "string") {
             var arr = [query_string[pair[0]], pair[1]];
             query_string[pair[0]] = arr;
             // If third or later entry with this name
-        } else
-        {
+        } 
+		else {
             query_string[pair[0]].push(pair[1]);
         }
     }
@@ -718,6 +716,12 @@ function calcScore( enc_time ) {
 		
 		tmp = ( data[idx] - substat_min[idx] * enc_time[enc_idx] ) * 100 / 
 			( substat_max[idx] - substat_min[idx] );
+			
+		// cut the score to half if it is flat atk, def or flat hp
+		if ( idx === 8 || idx === 9 || idx === 10 ) {
+			console.log( "calcScore, cut the score type " + getSubstatName(idx) + " from " + tmp + " to " + ( tmp / 2 ));
+			tmp = tmp / 2;
+		}
 			
 		// console.log( "score data[" + getSubstatName(idx) + "]" + data[idx] +
 		//    " substat_min:" + substat_min[idx] +
