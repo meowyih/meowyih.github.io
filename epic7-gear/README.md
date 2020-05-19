@@ -1,3 +1,7 @@
+# Tool Link
+
+en version (https://meowyih.github.io/epic7-gear/index.html?lang=en)
+tw version (https://meowyih.github.io/epic7-gear/index.html?lang=tw)
 
 # What is this?
 
