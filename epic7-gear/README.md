@@ -40,6 +40,15 @@ I am pretty sure the ranges for flat attack, flat defense and flat health are no
 
 # Some Data...
 
+## Maximin score for different gears
+
+|      |+0 |+3 |+6 |+9 |+12|+15|
+|------|---|---|---|---|---|---|
+|Good  |100|200|300|400|500|600|
+|Rare  |200|300|400|500|600|700|
+|Heroic|300|400|500|600|700|800|
+|Epic  |400|500|600|700|800|900|
+
 ## Number of substats for different gears
 
 |      |+0 |+3 |+6 |+9 |+12|+15|
