@@ -246,10 +246,10 @@ function getRequiredDataCount() {
 		return gear_enc_lv >= 4 ? 4 : gear_enc_lv;		
 	}
 	else if ( gear_type === 2 ) {
-		if ( gear_enc_lv < 3 ) {
+		if ( gear_enc_lv < 4 ) {
 			return 2;
 		}
-		else if ( gear_enc_lv === 3 ) {
+		else if ( gear_enc_lv === 4 ) {
 			return 3;
 		}
 		else {
@@ -291,8 +291,8 @@ function getSubstatMaxCoff() {
 		switch( gear_enc_lv ) {
 			case 1: coff = 1; break;
 			case 2: coff = 2; break;
-			case 3: case 4: coff = 3; break;
-			case 5: coff = 4; break;
+			case 3: coff = 3; break;
+			case 4: case 5: coff = 4; break;
 			case 6: coff = 5; break;
 			default: coff = 5;			
 		}

@@ -54,8 +54,8 @@ I am pretty sure the ranges for flat attack, flat defense and flat health are no
 |      |+0 |+3 |+6 |+9 |+12|+15|
 |------|---|---|---|---|---|---|
 |Good  |1  |2  |3  |4  |4  |4  |
-|Rare  |2  |2  |3  |4  |4  |4  |
-|Heroic|3  |3  |3  |4  |4  |4  |
+|Rare  |2  |2  |2  |3  |4  |4  |
+|Heroic|3  |3  |3  |3  |4  |4  |
 |Epic  |4  |4  |4  |4  |4  |4  |
 
 ## Substat upperbound coefficient
@@ -63,8 +63,8 @@ I am pretty sure the ranges for flat attack, flat defense and flat health are no
 |      |+0 |+3 |+6 |+9 |+12|+15|
 |------|---|---|---|---|---|---|
 |Good  |1  |1  |1  |1  |2  |3  |
-|Rare  |1  |2  |2  |2  |3  |4  |
-|Heroic|1  |2  |3  |3  |4  |5  |
+|Rare  |1  |2  |2  |3  |3  |4  |
+|Heroic|1  |2  |3  |4  |4  |5  |
 |Epic  |1  |2  |3  |4  |5  |6  |
 
 ## Substat range for each roll
