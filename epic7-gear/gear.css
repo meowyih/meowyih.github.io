@@ -38,6 +38,7 @@ input[type=number], select {
 }
 
 .grid-line {
+  text-align: center;
   grid-column: 1 / span 3;
 }
 
