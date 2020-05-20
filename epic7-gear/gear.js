@@ -732,7 +732,7 @@ function getPossibleErrorDesc() {
 		}
 		
 		if ( hasFlatSubstat ) {
-			str = str + " We don't know the range for the flat substat for now, so the error might also caused by the wrong flat substat setting in this tool.";
+			str = str + " We don't know the exact range for the flat substat, so the error might also caused by the wrong flat substat setting in this tool.";
 		}
 	}
 	
