@@ -962,7 +962,8 @@ function report( enc_time, score ) {
 	
 	str = str + '<span style="font-size:150%">';
 	
-	if ( percent_score > 80 ) {		
+	if ( percent_score > 80 ) {	
+		// TODO: use more accurate way to calculate the possibility
 		// the range for atk%/def%/hp% is 5
 		op_cost = Math.ceil( 1 / Math.pow( 0.2 - (100-percent_score )/1300, getMultiplier()));
 	}
