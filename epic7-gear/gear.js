@@ -574,7 +574,12 @@ function cal1() {
 		
 	score = calcScore( enc_time );
 	
-	report( enc_time, score );
+	if ( score === false ) {
+		err( getPossibleErrorDesc( enc_time ) );
+	}
+	else {
+		report( enc_time, score );
+	}
 }
 
 function cal2() {
@@ -582,7 +587,7 @@ function cal2() {
 	var total_enc_times = getMultiplier();
 	var enc_time = [0, 0];
 	var best_score_enc_time = [0, 0];
-	var score, best_score = 0;
+	var score, best_score = -1;
 	
 	// find all the combination
 	for ( var i = 1; i <= total_enc_times; i ++ ) {
@@ -596,18 +601,21 @@ function cal2() {
 		
 		// check if such combination larger than minimum substate
 		if ( checkSubstatmin( enc_time ) === false ) {
+			// console.log( "[cal2] checkSubstatmin( " + enc_time[0] + "," + enc_time[1] + ") return false"  );
 			continue;
 		}
 				
 		score = calcScore( enc_time );
 		
-		if ( best_score === 0 || best_score < score ) {
+		// console.log( "[cal2] score=" + score );
+		
+		if ( score !== false && ( best_score === 0 || best_score < score )) {
 			best_score = score;
 			best_score_enc_time = enc_time.slice();
 		}
 	}
 	
-	if ( best_score === 0 ) {
+	if ( best_score < 0 ) {
 		err( getPossibleErrorDesc( enc_time ) );
 	}
 	else {
@@ -621,7 +629,7 @@ function cal3() {
 	var enc_time = [0, 0, 0];
 	var score;
 	var best_score_enc_time = [0, 0, 0];
-	var score, best_score = 0;
+	var score, best_score = -1;
 	
 	// find all the combination
 	for ( var i = 1; i <= total_enc_times; i ++ ) {
@@ -641,7 +649,7 @@ function cal3() {
 				// calculate the score
 				score = calcScore( enc_time );
 				
-				if ( best_score === 0 || best_score < score ) {
+				if ( score !== false && ( best_score === 0 || best_score < score )) {
 					best_score = score;
 					best_score_enc_time = enc_time.slice();
 				}
@@ -649,7 +657,7 @@ function cal3() {
 		}
 	}
 	
-	if ( best_score === 0 ) {
+	if ( best_score < 0 ) {
 		err( getPossibleErrorDesc( enc_time ) );
 	}
 	else {
@@ -663,7 +671,7 @@ function cal4() {
 	var enc_time = [0, 0, 0, 0];
 	var score;
 	var best_score_enc_time = [0, 0, 0, 0];
-	var score, best_score = 0;
+	var score, best_score = -1;
 	
 	// find all the combination
 	for ( var i = 1; i <= total_enc_times; i ++ ) {
@@ -688,7 +696,7 @@ function cal4() {
 					
 					// console.log( "cal4, score:" + score );
 					
-					if ( best_score === 0 || best_score < score ) {
+					if ( score !== false && ( best_score === 0 || best_score < score )) {
 						best_score = score;
 						best_score_enc_time = enc_time.slice();
 					}
@@ -697,7 +705,7 @@ function cal4() {
 		}
 	}
 	
-	if ( best_score === 0 ) {
+	if ( best_score < 0 ) {
 		err( getPossibleErrorDesc( enc_time ) );
 	}
 	else {
@@ -867,6 +875,7 @@ function calcScore( enc_time ) {
 	var substat_max = getSubstatMax();
 	var enc_idx = 0;
 	var score = 0;
+	var has_score = false;
 	var tmp;
 	
 	// calculate the score
@@ -886,22 +895,25 @@ function calcScore( enc_time ) {
 			
 		// cut the score to half if it is flat atk, def or flat hp
 		if ( idx === 8 || idx === 9 || idx === 10 ) {
-			console.log( "calcScore, cut the score type " + getSubstatName(idx) + " from " + tmp + " to " + ( tmp / 2 ));
+			// console.log( "calcScore, cut the score type " + getSubstatName(idx) + " from " + tmp + " to " + ( tmp / 2 ));
 			tmp = tmp / 2;
 		}
 			
 		// console.log( "score data[" + getSubstatName(idx) + "]" + data[idx] +
-		//    " substat_min:" + substat_min[idx] +
-		//	" substat_max:" + substat_max[idx] +
-		//	" enc_time[" + enc_idx + "]" + enc_time[enc_idx] +
-		//	" score:" + tmp );
-			
-		score = score + tmp;
-			
+		//  " substat_min:" + substat_min[idx] +
+		// " substat_max:" + substat_max[idx] +
+		// " enc_time[" + enc_idx + "]" + enc_time[enc_idx] +
+		// " score:" + tmp );
+
+		has_score = true;		
+		score = score + tmp;			
 		enc_idx ++;
 	}
 	
-	return score;
+	if ( has_score ) 
+		return score;
+	else
+		return false;
 }
 
 function err( msg ) {
@@ -928,6 +940,8 @@ function report( enc_time, score ) {
 	var valid_data_high_score_count = 0;
 	var valid_data_high_score_idx = [0,0,0,0];
 	
+	var op_cost_numerator = 0;
+	var op_cost_denominator = 0;
 	var op_cost = 0;
 	
 	for ( var idx = 0; idx < 11; idx ++ ) {
@@ -962,30 +976,68 @@ function report( enc_time, score ) {
 	
 	str = str + '<span style="font-size:150%">';
 	
-	if ( percent_score > 80 ) {	
-		// TODO: use more accurate way to calculate the possibility
-		// the range for atk%/def%/hp% is 5
-		op_cost = Math.ceil( 1 / Math.pow( 0.2 - (100-percent_score )/1300, getMultiplier()));
+	op_cost_numerator = 1;
+	op_cost_denominator= 1;
+	for ( var idx = 0; idx < valid_data_size; idx ++ ) {
+		
+		var numerator = Math.pow( ( substat_max[valid_data_type[idx]] - ( valid_data[idx] / enc_time[idx] ) + 1 ), enc_time[idx] );
+		var denominator = Math.pow( ( substat_max[valid_data_type[idx]] - substat_min[valid_data_type[idx]] + 1 ), enc_time[idx] );
+		
+		// out-of-range substat 
+		if ( numerator < 1 ) {
+			numerator = 1;
+		}
+		
+		// out-of-range substat 
+		if ( denominator < 1 ) {
+			denominator = 1;
+		}
+		
+		// flat substat is not that important and might cause too much bias, 
+		// for example, 1/54, so we set a boundary as 1/4, which is 1/2 of atk%/def%/hp%
+		if ( valid_data_type[idx] === 8 || valid_data_type[idx] === 9 || valid_data_type[idx] === 10 ) {
+			if ( numerator / denominator < 1 / 4 ) {
+				numerator = 1;
+				denominator = 4;
+			}
+		}
+		
+		op_cost_numerator = op_cost_numerator * numerator;
+		op_cost_denominator = op_cost_denominator * denominator;
+		// console.log( "(" + numerator + "/" + denominator + ")" );
+	}
+	
+	switch( getGearType() ) {
+		case 1: break;
+		case 2: op_cost_denominator = op_cost_denominator * 2; break;
+		case 3: op_cost_denominator = op_cost_denominator * 3; break;
+		case 4: op_cost_denominator = op_cost_denominator * 4; break;
+	}
+	
+	if ( op_cost_numerator / op_cost_denominator === 1 ) {
+		op_cost = 1;
 	}
 	else {
-		op_cost = Math.ceil( 1 / Math.pow(( 100 - percent_score ) / 100, getMultiplier()));
+		op_cost = Math.ceil( 1 / ( op_cost_numerator / op_cost_denominator ));
 	}
+	
+	// console.log( "op: " + ( op_cost_numerator / op_cost_denominator ) + " op_cost: " + op_cost );
 	
 	if ( percent_score >= 70 && getGearEncLevel() > 4 ) {
 
 		if ( g_lang === 'tw' )
-			str = str + "[總評] 神裝! 記得鎖起來! 此裝備需要花費 " + op_cost + " 個裝備才做得出一件。<br>";
+			str = str + "[總評] 神裝! 記得鎖起來! 此裝備需要花費 " + op_cost + " 個裝備才做得出相近的點數。<br>";
 		else 
-			str = str + "[Summary] Godlike gear! Don't forget to lock it. You need to spend " + op_cost + " gears to come out this one.<br>";
+			str = str + "[Summary] Godlike gear! Don't forget to lock it. You need to spend " + op_cost + " gears to come out a similar one.<br>";
 	}
 	else if ( percent_score >= 70 || percent_score >= getScoreThreshold() ) {
 		
 		var threshold = percent_score > 70 ? 70 : getScoreThreshold();
 		
 		if ( g_lang === 'tw' ) 
-			str = str + "[總評] 還不錯，建議留下。此裝備需要花費 " + op_cost + " 個裝備才做得出一件。<br>";
+			str = str + "[總評] 還不錯，建議留下。此裝備需要花費 " + op_cost + " 個裝備才做得出相近的點數。<br>";
 		else 
-			str = str + "[Summary] Not bad. You should keep it. You need to spend " + op_cost + " gears to come out this one.<br>";
+			str = str + "[Summary] Not bad. You should keep it. You need to spend " + op_cost + " gears to come out a similar one.<br>";
 	}
 	else if ( valid_data_high_score_count > 0 ) {
 		if ( g_lang === 'tw' ) {
@@ -999,7 +1051,7 @@ function report( enc_time, score ) {
 					str = str + "都";
 			}
 			
-			str = str + "很高，可以留下。此裝備需要花費 " + op_cost + " 個裝備才做得出一件。<br>";
+			str = str + "很高，可以留下。此裝備需要花費 " + op_cost + " 個裝備才做得出相近的點數。<br>";
 		}
 		else {
 			str = str + "[Summary] Although the score is not very high, it has a good roll in " +
@@ -1013,14 +1065,14 @@ function report( enc_time, score ) {
 				str = str + " and " + getSubstatName( valid_data_high_score_idx[idx] ).toLowerCase();
 			}
 			
-			str = str + ", keep it if you want. You need to spend " + op_cost + " gears to come out this one.<br>";
+			str = str + ", keep it if you want. You need to spend " + op_cost + " gears to come out a similar one.<br>";
 		}
 	}
 	else {
 		if ( g_lang === 'tw' ) 
-			str = str + "[總評] 如果不缺裝備，建議賣掉。此裝備需要花費 " + op_cost + " 個裝備才做得出一件。<br>";
+			str = str + "[總評] 如果不缺裝備，建議賣掉。此裝備需要花費 " + op_cost + " 個裝備才做得出相近的點數。<br>";
 		else
-			str = str + "[Summary] Sell it if you are lack of inventory. You need to spend " + op_cost + " gears to come out this one.<br>";
+			str = str + "[Summary] Sell it if you are lack of inventory. You need to spend " + op_cost + " gears to come out a similar one.<br>";
 	}
 	
 	str = str + '</span>';
