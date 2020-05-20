@@ -928,6 +928,8 @@ function report( enc_time, score ) {
 	var valid_data_high_score_count = 0;
 	var valid_data_high_score_idx = [0,0,0,0];
 	
+	var op_cost = 0;
+	
 	for ( var idx = 0; idx < 11; idx ++ ) {
 		
 		if ( isNaN( data[idx] ) || data[idx] <= 0 ) {
@@ -960,21 +962,23 @@ function report( enc_time, score ) {
 	
 	str = str + '<span style="font-size:150%">';
 	
+	op_cost = Math.ceil( 1 / Math.pow(( 100 - percent_score ) / 100, getMultiplier()));
+	
 	if ( percent_score >= 70 && getGearEncLevel() > 4 ) {
 
 		if ( g_lang === 'tw' )
-			str = str + "[總評] 神裝! 記得鎖起來! 需要花費至少 " + Math.ceil(1/Math.pow(0.3, getMultiplier())) + " 個裝備才做得出一件。<br>";
+			str = str + "[總評] 神裝! 記得鎖起來! 此裝備需要花費 " + op_cost + " 個裝備才做得出一件。<br>";
 		else 
-			str = str + "[Summary] Godlike gear! Don't forget to lock it. You need to spend at least " + Math.ceil(1/Math.pow(0.3, getMultiplier())) + " gears to come out this one.<br>";
+			str = str + "[Summary] Godlike gear! Don't forget to lock it. You need to spend " + op_cost + " gears to come out this one.<br>";
 	}
 	else if ( percent_score >= 70 || percent_score >= getScoreThreshold() ) {
 		
 		var threshold = percent_score > 70 ? 70 : getScoreThreshold();
 		
 		if ( g_lang === 'tw' ) 
-			str = str + "[總評] 還不錯，建議留下。需要花費至少 " + Math.ceil(1/Math.pow(threshold/100, getMultiplier())) + " 個裝備才做得出一件。<br>";
+			str = str + "[總評] 還不錯，建議留下。此裝備需要花費 " + op_cost + " 個裝備才做得出一件。<br>";
 		else 
-			str = str + "[Summary] Not bad. You should keep it. You need to spend at least " + Math.ceil(1/Math.pow(threshold/100, getMultiplier())) + " gears to come out this one.<br>";
+			str = str + "[Summary] Not bad. You should keep it. You need to spend " + op_cost + " gears to come out this one.<br>";
 	}
 	else if ( valid_data_high_score_count > 0 ) {
 		if ( g_lang === 'tw' ) {
@@ -988,7 +992,7 @@ function report( enc_time, score ) {
 					str = str + "都";
 			}
 			
-			str = str + "很高，可以留下。<br>";
+			str = str + "很高，可以留下。此裝備需要花費 " + op_cost + " 個裝備才做得出一件。<br>";
 		}
 		else {
 			str = str + "[Summary] Although the score is not very high, it has a good roll in " +
@@ -1002,14 +1006,14 @@ function report( enc_time, score ) {
 				str = str + " and " + getSubstatName( valid_data_high_score_idx[idx] ).toLowerCase();
 			}
 			
-			str = str + ", keep it if you want.<br>";
+			str = str + ", keep it if you want. You need to spend " + op_cost + " gears to come out this one.<br>";
 		}
 	}
 	else {
 		if ( g_lang === 'tw' ) 
-			str = str + "[總評] 如果不缺裝備，建議賣掉。<br>";
+			str = str + "[總評] 如果不缺裝備，建議賣掉。此裝備需要花費 " + op_cost + " 個裝備才做得出一件。<br>";
 		else
-			str = str + "[Summary] Sell it if you are lack of inventory.<br>";
+			str = str + "[Summary] Sell it if you are lack of inventory. You need to spend " + op_cost + " gears to come out this one.<br>";
 	}
 	
 	str = str + '</span>';
