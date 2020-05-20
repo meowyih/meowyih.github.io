@@ -2,28 +2,28 @@
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto;
-  grid-gap: 1px;
-  padding: 1px;
+  grid-gap: 1mm;
+  padding: 1mm;
 }
 
 
 input[type=text], select {
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  padding: 3mm 4mm;
+  margin: 1mm 0;
   display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 0.3mm solid #ccc;
+  border-radius: 1mm;
   box-sizing: border-box;
 }
 
 input[type=number], select {
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  padding: 3mm 4mm;
+  margin: 1mm 0;
   display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 0.3mm solid #ccc;
+  border-radius: 1mm;
   box-sizing: border-box;
 }
 
@@ -59,11 +59,10 @@ input[type=number], select {
   background-color: #4CAF50;
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 3mm 4mm;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+  margin: 1mm 0;
   cursor: pointer;
 }
