@@ -122,6 +122,19 @@ function getGearEncLevel() {
 	return 0;
 }
 
+function getScoreThreshold() {
+	switch( getGearEncLevel() ) {
+		case 1: return 70;
+		case 2: return 70;
+		case 3: return 65;
+		case 4: return 60;
+		case 5: return 55;
+		case 6: return 50;
+	}
+	
+	return 70;
+}
+
 // 1 - normal, 2 - rare, 3 - hero, 4 - legend
 function getGearType() {
 	
@@ -947,15 +960,25 @@ function report( enc_time, score ) {
 	
 	str = str + '<span style="font-size:150%">';
 	
-	if ( percent_score > 70 ) {
-		if ( g_lang === 'tw' ) 
-			str = str + "[總評] 強烈建議留下<br>";
+	if ( percent_score >= 70 && getGearEncLevel() > 4 ) {
+
+		if ( g_lang === 'tw' )
+			str = str + "[總評] 神裝! 記得鎖起來! 需要花費至少 " + Math.ceil(1/Math.pow(0.3, getMultiplier())) + " 個裝備才做得出一件。<br>";
 		else 
-			str = str + "[Summary] Strongly recommand to keep this gear.<br>";
+			str = str + "[Summary] Godlike gear! Don't forget to lock it. You need to spend at least " + Math.ceil(1/Math.pow(0.3, getMultiplier())) + " gears to come out this one.<br>";
+	}
+	else if ( percent_score >= 70 || percent_score >= getScoreThreshold() ) {
+		
+		var threshold = percent_score > 70 ? 70 : getScoreThreshold();
+		
+		if ( g_lang === 'tw' ) 
+			str = str + "[總評] 還不錯，建議留下。需要花費至少 " + Math.ceil(1/Math.pow(threshold/100, getMultiplier())) + " 個裝備才做得出一件。<br>";
+		else 
+			str = str + "[Summary] Not bad. You should keep it. You need to spend at least " + Math.ceil(1/Math.pow(threshold/100, getMultiplier())) + " gears to come out this one.<br>";
 	}
 	else if ( valid_data_high_score_count > 0 ) {
 		if ( g_lang === 'tw' ) {
-			str = str + "[總評] 雖然裝備潛能值未達70%，但" + getSubstatName( valid_data_high_score_idx[0] );
+			str = str + "[總評] 雖然裝備潛能值未達" + getScoreThreshold() + "%，但" + getSubstatName( valid_data_high_score_idx[0] );
 			
 			for ( var idx = 1; idx < valid_data_high_score_count; idx ++ ) {
 				str = str + ", " + getSubstatName( valid_data_high_score_idx[idx] );
@@ -965,7 +988,7 @@ function report( enc_time, score ) {
 					str = str + "都";
 			}
 			
-			str = str + "偏高，可以留下。<br>";
+			str = str + "很高，可以留下。<br>";
 		}
 		else {
 			str = str + "[Summary] Although the score is not very high, it has a good roll in " +
