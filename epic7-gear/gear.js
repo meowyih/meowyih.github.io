@@ -596,12 +596,7 @@ function cal2() {
 	}
 	
 	if ( best_score === 0 ) {
-		if ( g_lang === 'tw' ) {
-			err( "錯誤: 裝備數據錯誤，請檢查副屬性值。" );
-		}
-		else {
-			err( "Error: Substat(s) value does not match the gear type or the enhance level." );
-		}
+		err( getPossibleErrorDesc() );
 	}
 	else {
 		report( best_score_enc_time, best_score );
@@ -643,12 +638,7 @@ function cal3() {
 	}
 	
 	if ( best_score === 0 ) {
-		if ( g_lang === 'tw' ) {
-			err( "錯誤: 裝備數據錯誤，請檢查副屬性值。" );
-		}
-		else {
-			err( "Error: Substat(s) value does not match the gear type or the enhance level." );
-		}
+		err( getPossibleErrorDesc() );
 	}
 	else {
 		report( best_score_enc_time, best_score );
@@ -738,11 +728,11 @@ function getPossibleErrorDesc() {
 		str = "Error: Substat(s) value does not match the gear type or the enhance level.";
 		
 		if ( gear_lv === 'lv90' ) {
-			str = str + "If the gear was Lv88 gear bought from arena, set to Lv85 gear and try again.";
+			str = str + " If the gear was Lv88 gear bought from arena, set to Lv85 gear and try again.";
 		}
 		
 		if ( hasFlatSubstat ) {
-			str = str + "We don't know the range for the flat substat for now, so the error might also caused by the wrong flat substat setting in this tool.";
+			str = str + " We don't know the range for the flat substat for now, so the error might also caused by the wrong flat substat setting in this tool.";
 		}
 	}
 	
