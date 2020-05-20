@@ -425,7 +425,6 @@ function validate() {
 	// 8. atk flat, 9. def flat, 10. hp flat
 	var data = getSubstat();
 	var substat_min = getSubstatMin();
-	var multiplier = getMultiplier();
 	var totaldata = 0;
 	var substat_name = "";
 	var reforgeMin = getReforge(0);
@@ -596,7 +595,7 @@ function cal2() {
 	}
 	
 	if ( best_score === 0 ) {
-		err( getPossibleErrorDesc() );
+		err( getPossibleErrorDesc( enc_time ) );
 	}
 	else {
 		report( best_score_enc_time, best_score );
@@ -638,7 +637,7 @@ function cal3() {
 	}
 	
 	if ( best_score === 0 ) {
-		err( getPossibleErrorDesc() );
+		err( getPossibleErrorDesc( enc_time ) );
 	}
 	else {
 		report( best_score_enc_time, best_score );
@@ -686,14 +685,14 @@ function cal4() {
 	}
 	
 	if ( best_score === 0 ) {
-		err( getPossibleErrorDesc() );
+		err( getPossibleErrorDesc( enc_time ) );
 	}
 	else {
 		report( best_score_enc_time, best_score );
 	}
 }
 
-function getPossibleErrorDesc() {
+function getPossibleErrorDesc( enc_time ) {
 	
 	var str = "";
 	var data = getSubstat();
@@ -711,10 +710,16 @@ function getPossibleErrorDesc() {
 		if ( idx === 8 || idx === 9 || idx === 10 ) {
 			hasFlatSubstat = true;
 		}
-	}	
+	}
 	
 	if ( g_lang === 'tw' ) {
 		str = "錯誤: 裝備數據錯誤，請檢查副屬性值。";
+		
+		if ( getMinTotalEncTime( enc_time ) > getMultiplier() ) {
+			str = str + "此屬性至少需要" + 
+				( getMinTotalEncTime( enc_time ) - getSubstatCount() ) + "次強化，但裝備只強化了" + 
+				( getMultiplier() - getSubstatCount() ) + "次。";
+		}
 		
 		if ( gear_lv === 'lv90' ) {
 			str = str + "若裝備為競技場Lv88裝備，建議視為Lv85重試。";
@@ -727,6 +732,12 @@ function getPossibleErrorDesc() {
 	else {
 		str = "Error: Substat(s) value does not match the gear type or the enhance level.";
 		
+		if ( getMinTotalEncTime( enc_time ) > getMultiplier() ) {
+			str = str + " The substats requires at least " + 
+				( getMinTotalEncTime( enc_time ) - getSubstatCount() ) + " upgrade, but it only did " + 
+				( getMultiplier() - getSubstatCount() ) + " times.";
+		}
+		
 		if ( gear_lv === 'lv90' ) {
 			str = str + " If the gear was Lv88 gear bought from arena, set to Lv85 gear and try again.";
 		}
@@ -737,6 +748,32 @@ function getPossibleErrorDesc() {
 	}
 	
 	return str;
+}
+
+function getMinTotalEncTime( enc_time ) {
+	
+	var data = getSubstat();
+	var total_enc_time = 0;
+	var substat_max = getSubstatMax();
+
+	// adjust for the reforge gear
+	for ( var idx = 0; idx < 11; idx ++ ) {
+		if ( isReforged() && ! isNaN( data[idx] ) && data[idx] > 0 ) {
+			data[idx] = data[idx] - getReforge( enc_time[idx] )[idx];
+		}
+	}
+	
+	// check how many enc times is necessary for each substate
+	for ( var idx = 0; idx < 11; idx ++ ) {
+		if ( ! isNaN( data[idx] ) && data[idx] > 0 ) {
+			console.log( "data[" + idx + "]=" + data[idx] + " substat_max=" + substat_max[idx] + " enc_time=" + (Math.ceil( data[idx] / substat_max[idx] ) - 1));
+			total_enc_time = total_enc_time + (Math.ceil( data[idx] / substat_max[idx] ) - 1);
+		}
+	}
+	
+	console.log( "total_enc_time:" + total_enc_time );
+	
+	return total_enc_time + getSubstatCount();
 }
 
 function checkSubstatmin( enc_time ) {
@@ -751,7 +788,7 @@ function checkSubstatmin( enc_time ) {
 	// console.log( "checkSubstatmin enter, data_count=" + 
 	//    data_count + " enc_time (" + 
 	//    enc_time[0] + "," + enc_time[1] + "," + 
-	//	enc_time[2] + "," + enc_time[3] + ")" );
+	//	  enc_time[2] + "," + enc_time[3] + ")" );
 	
 	for ( var idx = 0; idx < 11; idx ++ ) {
 		var max, min;
