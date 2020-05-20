@@ -160,17 +160,17 @@ function getSubstatMax() {
 			return [ 7, 7, 7, 7, 7, 
 				6, 4, 4, 
 				42, 30, 180 ];
-		case "lv85":
+		case "lv85": case "lv90r":
 			return [ 8, 8, 8, 8, 8, 
 				7, 5, 4, 
 				46, 33, 200 ];
 		case "lv90":
 			return [ 9, 9, 9, 9, 9, 
 				8, 6, 5, 
-				50, 36, 220 ];
+				50, 36, 220 ];			
 	}
 	
-	alert( "fatal error" );
+	alert( "fatal error in getSubstatMax()" );
 	return [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 }
 
@@ -185,7 +185,7 @@ function getSubstatMin() {
 			return [ 3, 3, 3, 3, 3, 
 				3, 2, 1, 
 				28, 23, 124 ];
-		case "lv85":
+		case "lv85": case "lv90r":
 			return [ 4, 4, 4, 4, 4, 
 				3, 3, 1, 
 				30, 25, 147 ];
@@ -195,8 +195,25 @@ function getSubstatMin() {
 				32, 27, 170 ];
 	}
 	
-	alert( "fatal error" );
+	alert( "fatal error in getSubstatMin()" );
 	return [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+}
+
+// 0. atk%, 1. def%, 2. hp%, 3. eff%, 4. res%
+// 5. critdmg
+// 6. critch
+// 7. spd
+// 8. atk flat, 9. def flat, 10. hp flat
+function getReforge( roll ) {
+	switch( roll ) {
+		case 0: return [ 1, 1, 1, 1, 1, 1, 1, 0, 12,  9, 50 ];
+		case 1: return [ 3, 3, 3, 3, 3, 2, 2, 1, 18, 14, 81 ];
+		case 2: return [ 4, 4, 4, 4, 4, 3, 3, 2, 24, 20, 112 ];
+		case 3: return [ 5, 5, 5, 5, 5, 4, 4, 3, 30, 25, 147 ];
+		case 4: return [ 7, 7, 7, 7, 7, 5, 5, 4, 38, 29, 173 ];
+		case 5: return [ 8, 8, 8, 8, 8, 6, 6, 5, 46, 33, 200 ];
+		default: return [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+	}
 }
 
 function getSubstat() {
@@ -312,22 +329,60 @@ function getSubstatMaxCoff() {
 	return coff;
 }
 
+function isReforged() {
+	var select_lv = document.getElementById("gear-lv");
+	var options_lv = select_lv.options;
+	var selected_lv = options_lv[options_lv.selectedIndex].id;
+	var reforge = getReforge(5);
+	
+	// reforge gear must be +15
+	if ( selected_lv === "lv90r" ) {
+		return true;
+	}
+	
+	return false;
+}
+
 function resetplaceholder() {
+	
+	var reforge = getReforge(5);
+	
+	// reforge gear must be +15
+	if ( isReforged() ) {
+		var select_enc_lv = document.getElementById("gear-enc-lv");
+		select_enc_lv.selectedIndex = 5;
+	}
 	
 	var substate_max = getSubstatMax();
 	var coff = getSubstatMaxCoff();
 	
-	document.getElementById("atkper").placeholder = "0% - " + substate_max[0]*coff + "%";
-	document.getElementById("defper").placeholder = "0% - " + substate_max[1]*coff + "%";
-	document.getElementById("hpper").placeholder = "0% - " + substate_max[2]*coff + "%";
-	document.getElementById("eff").placeholder = "0% - " + substate_max[3]*coff + "%";
-	document.getElementById("res").placeholder = "0% - " + substate_max[4]*coff + "%";
-	document.getElementById("critdmg").placeholder  = "0% - " + substate_max[5]*coff + "%";
-	document.getElementById("critch").placeholder  = "0% - " + substate_max[6]*coff + "%";
-	document.getElementById("spd").placeholder = "0 - " + substate_max[7]*coff;
-	document.getElementById("atkflat").placeholder = "0 - " + substate_max[8]*coff;
-	document.getElementById("defflat").placeholder = "0 - " + substate_max[9]*coff;
-	document.getElementById("hpflat").placeholder = "0 - " + substate_max[10]*coff;
+	if ( isReforged() ) {
+		
+		document.getElementById("atkper").placeholder = "0% - " + ( substate_max[0]*coff + reforge[0] ) + "%";
+		document.getElementById("defper").placeholder = "0% - " + ( substate_max[1]*coff + reforge[1] ) + "%";
+		document.getElementById("hpper").placeholder = "0% - " + ( substate_max[2]*coff + reforge[2] ) + "%";
+		document.getElementById("eff").placeholder = "0% - " + ( substate_max[3]*coff + reforge[3] ) + "%";
+		document.getElementById("res").placeholder = "0% - " + ( substate_max[4]*coff + reforge[4] ) + "%";
+		document.getElementById("critdmg").placeholder  = "0% - " + ( substate_max[5]*coff + reforge[5] ) + "%";
+		document.getElementById("critch").placeholder  = "0% - " + ( substate_max[6]*coff + reforge[6] ) + "%";
+		document.getElementById("spd").placeholder = "0 - " + ( substate_max[7]*coff + reforge[7] );
+		document.getElementById("atkflat").placeholder = "0 - " + ( substate_max[8]*coff + reforge[8] );
+		document.getElementById("defflat").placeholder = "0 - " + ( substate_max[9]*coff + reforge[9] );
+		document.getElementById("hpflat").placeholder = "0 - " + ( substate_max[10]*coff + reforge[10] );
+	}
+	else {	
+		document.getElementById("atkper").placeholder = "0% - " + substate_max[0]*coff + "%";
+		document.getElementById("defper").placeholder = "0% - " + substate_max[1]*coff + "%";
+		document.getElementById("hpper").placeholder = "0% - " + substate_max[2]*coff + "%";
+		document.getElementById("eff").placeholder = "0% - " + substate_max[3]*coff + "%";
+		document.getElementById("res").placeholder = "0% - " + substate_max[4]*coff + "%";
+		document.getElementById("critdmg").placeholder  = "0% - " + substate_max[5]*coff + "%";
+		document.getElementById("critch").placeholder  = "0% - " + substate_max[6]*coff + "%";
+		document.getElementById("spd").placeholder = "0 - " + substate_max[7]*coff;
+		document.getElementById("atkflat").placeholder = "0 - " + substate_max[8]*coff;
+		document.getElementById("defflat").placeholder = "0 - " + substate_max[9]*coff;
+		document.getElementById("hpflat").placeholder = "0 - " + substate_max[10]*coff;
+	}
 	
 	switch( getGearType() ) {
 		case 1:
@@ -369,11 +424,11 @@ function validate() {
 	// 7. spd
 	// 8. atk flat, 9. def flat, 10. hp flat
 	var data = getSubstat();
-	var substat_max = getSubstatMax();
 	var substat_min = getSubstatMin();
 	var multiplier = getMultiplier();
 	var totaldata = 0;
 	var substat_name = "";
+	var reforgeMin = getReforge(0);
 			
 	// check min
 	for ( var idx = 0; idx < 11; idx ++ ) {
@@ -420,19 +475,28 @@ function validate() {
 	// check total number of data
 	for ( var idx = 0; idx < 11; idx ++ ) {
 		
+		var min = 0;
+		
 		if ( isNaN( data[idx] ) || data[idx] <= 0 ) {
 			continue;
 		}
 		
 		totaldata ++;
 		
-		if ( data[idx] > 0 && data[idx] < substat_min[idx] ) {
+		if ( isReforged() ) {
+			min = substat_min[idx] + reforgeMin[idx];
+		}
+		else {
+			min = substat_min[idx];
+		}
+				
+		if ( data[idx] > 0 && data[idx] < min ) {
 			if ( g_lang === 'tw' )
-				err( "錯誤: " + getSubstatName(idx) + " (" + data[idx] + ") 的至少要大於" + substat_min[idx] );
+				err( "錯誤: " + getSubstatName(idx) + " (" + data[idx] + ") 的至少要大於" + min );
 			else
-				err( "Error: " + getSubstatName(idx) + " (" + data[idx] + ") must be larger than " + substat_min[idx] );
-		return -1;
-	}
+				err( "Error: " + getSubstatName(idx) + " (" + data[idx] + ") must be larger than " + min );
+			return -1;
+		}
 	}
 	
 	// check if data count meet the requirement 
@@ -620,7 +684,7 @@ function cal4() {
 					// calculate the score
 					score = calcScore( enc_time );
 					
-					console.log( "cal4, score:" + score );
+					// console.log( "cal4, score:" + score );
 					
 					if ( best_score === 0 || best_score < score ) {
 						best_score = score;
@@ -632,16 +696,57 @@ function cal4() {
 	}
 	
 	if ( best_score === 0 ) {
-		if ( g_lang === 'tw' ) {
-			err( "錯誤: 裝備數據錯誤，請檢查副屬性值。" );
-		}
-		else {
-			err( "Error: Substat(s) value does not match the gear type or the enhance level." );
-		}
+		err( getPossibleErrorDesc() );
 	}
 	else {
 		report( best_score_enc_time, best_score );
 	}
+}
+
+function getPossibleErrorDesc() {
+	
+	var str = "";
+	var data = getSubstat();
+	var hasFlatSubstat = false;
+	
+	var select = document.getElementById("gear-lv");
+	var options = select.options;
+	var gear_lv = options[options.selectedIndex].id;
+	
+	for ( var idx = 0; idx < 11; idx ++ ) {
+		if ( isNaN( data[idx] ) || data[idx] <= 0 ) {
+			continue;
+		}
+		
+		if ( idx === 8 || idx === 9 || idx === 10 ) {
+			hasFlatSubstat = true;
+		}
+	}	
+	
+	if ( g_lang === 'tw' ) {
+		str = "錯誤: 裝備數據錯誤，請檢查副屬性值。";
+		
+		if ( gear_lv === 'lv90' ) {
+			str = str + "若裝備為競技場Lv88裝備，建議視為Lv85重試。";
+		}
+		
+		if ( hasFlatSubstat ) {
+			str = str + "目前沒有公認的白值上下限，所以也有可能是網頁設定的白值上下限錯誤。";
+		}
+	}
+	else {
+		str = "Error: Substat(s) value does not match the gear type or the enhance level.";
+		
+		if ( gear_lv === 'lv90' ) {
+			str = str + "If the gear was Lv88 gear bought from arena, set to Lv85 gear and try again.";
+		}
+		
+		if ( hasFlatSubstat ) {
+			str = str + "We don't know the range for the flat substat for now, so the error might also caused by the wrong flat substat setting in this tool.";
+		}
+	}
+	
+	return str;
 }
 
 function checkSubstatmin( enc_time ) {
@@ -659,28 +764,44 @@ function checkSubstatmin( enc_time ) {
 	//	enc_time[2] + "," + enc_time[3] + ")" );
 	
 	for ( var idx = 0; idx < 11; idx ++ ) {
+		var max, min;
+		
 		if ( isNaN( data[idx] ) || data[idx] <= 0 ) {
 			continue;
 		}
 		
-		// tolerant the value that beyond the possible maximum
-		if ( data[idx] > substat_max[idx] * coff ) {
-			data[idx] = substat_max[idx] * coff;
+		if ( isReforged() ) {
+			
+			if ( data[idx] > substat_max[idx] * coff + getReforge(5)[idx] ) {
+				data[idx] = substat_max[idx] * coff + getReforge(5)[idx];
+			}
+			
+			max = substat_max[idx] * enc_time[enc_idx] + getReforge( enc_time[enc_idx] - 1 )[idx];
+			min = substat_min[idx] * enc_time[enc_idx] + getReforge( enc_time[enc_idx] - 1 )[idx];
+		}
+		else {
+			
+			if ( data[idx] > substat_max[idx] * coff ) {
+				data[idx] = substat_max[idx] * coff;
+			}
+			
+			max = substat_max[idx] * enc_time[enc_idx];
+			min = substat_min[idx] * enc_time[enc_idx];
 		}
 		
 		if ( enc_idx >= data_count ) {
-		//	console.log( "checkSubstatmin enc_idx =" + enc_idx + 
-		//	             " total substate count:" + data_count + ", break");
+			//	console.log( "checkSubstatmin enc_idx =" + enc_idx + 
+			//	             " total substate count:" + data_count + ", break");
 			break;
 		}
 		else {
-			if ( data[idx] < substat_min[idx] * enc_time[enc_idx] ) {
+			if ( data[idx] < min ) {
 			//	console.log( "checkSubstatmin return false, data[" + getSubstatName(idx) + "]=" + data[idx] + 
 			//	 	" substat_min[" + getSubstatName(idx) + "]=" + substat_min[idx] +
 			//		" enc_time[" + enc_idx + "]=" + enc_time[enc_idx] );
 				return false;
 			}
-			else if ( data[idx] > substat_max[idx] * enc_time[enc_idx] ) {
+			else if ( data[idx] > max ) {
 			//	console.log( "checkSubstatmin return false, data[" + getSubstatName(idx) + "]=" + data[idx] + 
 			//	 	" substat_max[" + getSubstatName(idx) + "]=" + substat_max[idx] +
 			//		" enc_time[" + enc_idx + "]=" + enc_time[enc_idx] );
@@ -714,8 +835,14 @@ function calcScore( enc_time ) {
 			continue;
 		}
 		
-		tmp = ( data[idx] - substat_min[idx] * enc_time[enc_idx] ) * 100 / 
-			( substat_max[idx] - substat_min[idx] );
+		if ( isReforged() ) {
+			tmp = ( data[idx] - substat_min[idx] * enc_time[enc_idx] - getReforge( enc_time[enc_idx] - 1)[idx] ) * 100 / 
+				( substat_max[idx] - substat_min[idx] );
+		}
+		else {
+			tmp = ( data[idx] - substat_min[idx] * enc_time[enc_idx] ) * 100 / 
+				( substat_max[idx] - substat_min[idx] );
+		}
 			
 		// cut the score to half if it is flat atk, def or flat hp
 		if ( idx === 8 || idx === 9 || idx === 10 ) {
@@ -847,8 +974,19 @@ function report( enc_time, score ) {
 				  valid_data[idx] + "點，完美值為" + 
 				  substat_max[valid_data_type[idx]] * enc_time[idx] + "點。";
 				  
-			if ( valid_data[idx] > substat_max[valid_data_type[idx]] * enc_time[idx] ) {
-				str = str + '<span style="font-color: red">警告: 數值超過最大值。</span>';
+			if ( isReforged() ) {
+				console.log( "reforge type " + idx + " (enc_time[idx] - 1)=" + (enc_time[idx] - 1) + 
+				   " getReforge( enc_time[idx] - 1 )[idx]" + getReforge( enc_time[idx] - 1 )[valid_data_type[idx]] );
+				str = str + "重鑄點數" + getReforge( enc_time[idx] - 1 )[valid_data_type[idx]] + "點。";
+
+				if ( valid_data[idx] > substat_max[valid_data_type[idx]] * enc_time[idx] + getReforge( enc_time[idx] - 1 )[valid_data_type[idx]] ) {
+					str = str + '<span style="font-color: red">警告: 數值超過最大值。</span>';
+				}
+			}
+			else {				  
+				if ( valid_data[idx] > substat_max[valid_data_type[idx]] * enc_time[idx] ) {
+					str = str + '<span style="font-color: red">警告: 數值超過最大值。</span>';
+				}
 			}
 			
 			str = str + '<br>';
@@ -864,8 +1002,18 @@ function report( enc_time, score ) {
 				  valid_data[idx] + " out of " + 
 				  substat_max[valid_data_type[idx]] * enc_time[idx] + " points.";
 				  
-			if ( valid_data[idx] > substat_max[valid_data_type[idx]] * enc_time[idx] ) {
-				str = str + '<span style="font-color: red">Warning: The value is larger than the possible limitation.</span>';
+			if ( isReforged() ) {
+				
+				str = str + "Got " + getReforge( enc_time[idx] - 1 )[valid_data_type[idx]] + " points from reforge.";
+				
+				if ( valid_data[idx] > substat_max[valid_data_type[idx]] * enc_time[idx] + getReforge( enc_time[idx] - 1 )[valid_data_type[idx]] ) {
+					str = str + '<span style="font-color: red">Warning: The value is larger than the possible limitation.</span>';
+				}
+			}
+			else {				  
+				if ( valid_data[idx] > substat_max[valid_data_type[idx]] * enc_time[idx] ) {
+					str = str + '<span style="font-color: red">Warning: The value is larger than the possible limitation.</span>';
+				}
 			}
 			
 			str = str + '<br>';

@@ -92,3 +92,34 @@ I am pretty sure the ranges for flat attack, flat defense and flat health are no
 |Lv58 - 71|28 - 42    |23 - 30     |124 - 180  |
 |Lv72 - 85|30 - 46    |25 - 33     |147 - 200  |
 |Lv86 - 99|32 - 50    |27 - 36     |170 - 220  |
+
+## Reforge (Lv90)
+
+|       |atk%|def%|hp% |eff%|res%|
+|-------|----|----|----|----|----|
+|0 roll |+1% |+1% |+1% |+1% |+1% |
+|1 roll |+3% |+3% |+3% |+3% |+3% | 
+|2 rolls|+4% |+4% |+4% |+4% |+4% |
+|3 rolls|+5% |+5% |+5% |+5% |+5% |
+|4 rolls|+7% |+7% |+7% |+7% |+7% |
+|5 rolls|+8% |+8% |+8% |+8% |+8% |
+
+|       |spd|crit.chance|crit.dmg|
+|-------|---|-----------|--------|
+|0 roll |+0 |+1%        |+1%     |
+|1 roll |+1 |+2%        |+2%     |  
+|2 rolls|+2 |+3%        |+3%     |
+|3 rolls|+3 |+4%        |+4%     |
+|4 rolls|+4 |+5%        |+5%     |  
+|5 rolls|+4 |+6%        |+6%     |
+
+The table for flat attack/defense/health is wrong. We use some estimate number to make the tool work.
+
+|       |flat attack|flat defense|flat health|
+|-------|-----------|------------|-----------|
+|0 roll |+12        |+9          |+50        |
+|1 roll |+18        |+14         |+81        |
+|2 rolls|+24        |+20         |+112       |
+|3 rolls|+30        |+25         |+147       |
+|4 rolls|+38        |+29         |+173       |
+|5 rolls|+46        |+33         |+200       |
