@@ -33,6 +33,7 @@ window.onload = function() {
 	
 	// change the substat label in the front page
     else if ( lang === 'cn' ) {
+        g_lang = 'cn';
 		document.title = "第七史诗 装备评分工具";
 		document.getElementById("gwhite").innerHTML = "一般";
 		document.getElementById("gblue").innerHTML = "稀有";
