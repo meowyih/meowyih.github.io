@@ -28,11 +28,12 @@ window.onload = function() {
 	
 	if ( lang === 'tw' ) {
 		g_lang = 'tw';
+        document.title = "第七史詩 裝備評分工具";
 	}
 	
 	// change the substat label in the front page
     else if ( lang === 'cn' ) {
-		
+		document.title = "第七史诗 装备评分工具";
 		document.getElementById("gwhite").innerHTML = "一般";
 		document.getElementById("gblue").innerHTML = "稀有";
 		document.getElementById("gpink").innerHTML = "英雄";
