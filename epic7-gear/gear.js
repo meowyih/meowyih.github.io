@@ -236,7 +236,7 @@ function getSubstatMax() {
 			return [ 8, 8, 8, 8, 8, 
 				7, 5, 4, 
 				47, 34, 202 ];
-		case "lv90":
+		case "90":
 			return [ 9, 9, 9, 9, 9, 
 				8, 6, 5, 
 				50, 36, 220 ];			
