@@ -200,23 +200,39 @@ function getGearType() {
 	return 0;
 }
 
+function getGearLevel() {
+	
+	var select = document.getElementById("gear-lv");
+	var options = select.options;
+	var selected = options[options.selectedIndex].id;
+	
+	switch( selected ) {
+		case "lv70":
+			return "70";
+		case "lv85": 
+			return "85";
+		case "lv90r":
+			return "90r";
+		case "lv90":
+			return "90";		
+	}
+	
+	return "0";
+}
+
 // 0. atk%, 1. def%, 2. hp%, 3. eff%, 4. res%
 // 5. critdmg
 // 6. critch
 // 7. spd
 // 8. atk flat, 9. def flat, 10. hp flat
 function getSubstatMax() {
-
-    var select = document.getElementById("gear-lv");
-	var options = select.options;
-	var selected = options[options.selectedIndex].id;
 	
-	switch( selected ) {
-		case "lv70":
+	switch( getGearLevel() ) {
+		case "70":
 			return [ 7, 7, 7, 7, 7, 
 				6, 4, 4, 
 				42, 30, 180 ];
-		case "lv85": case "lv90r":
+		case "85": case "90r":
 			return [ 8, 8, 8, 8, 8, 
 				7, 5, 4, 
 				47, 34, 202 ];
@@ -354,8 +370,8 @@ function getSubstatMaxCoff() {
 	if ( gear_type === 2 ) {
 		switch( gear_enc_lv ) {
 			case 1: coff = 1; break;
-			case 2: case 3: case 4: coff = 2; break;
-			case 5: coff = 3; break;
+			case 2: coff = 2; break;
+			case 3: case 4: case 5: coff = 3; break;
 			case 6: coff = 4; break;
 			default: coff = 4;			
 		}
@@ -959,17 +975,29 @@ function calcScore( enc_time ) {
 	
 	// calculate the score
 	for ( var idx = 0; idx < 11; idx ++ ) {
+		
+		var substat_max_tmp = 0; // to handle the special case for speed
+		
 		if ( isNaN( data[idx] ) || data[idx] <= 0 ) {
 			continue;
 		}
 		
+		// the maximum substate for lv85 speed could be 5, but it extremely rare.
+		// so we use 4 as maximum to calculate the score 
+		if (( getGearLevel() === "85" || getGearLevel === "90r" ) && idx === 7 ) {
+			substat_max_tmp = 4;
+		}
+		else {
+			substat_max_tmp = substat_max[idx];
+		}
+		
 		if ( isReforged() ) {
 			tmp = ( data[idx] - substat_min[idx] * enc_time[enc_idx] - getReforge( enc_time[enc_idx] - 1)[idx] ) * 100 / 
-				( substat_max[idx] - substat_min[idx] );
+				( substat_max_tmp - substat_min[idx] );
 		}
 		else {
 			tmp = ( data[idx] - substat_min[idx] * enc_time[enc_idx] ) * 100 / 
-				( substat_max[idx] - substat_min[idx] );
+				( substat_max_tmp - substat_min[idx] );
 		}
 			
 		// cut the score to half if it is flat atk, def or flat hp
@@ -1180,10 +1208,17 @@ function report( enc_time, score ) {
 		str = str + "[跳點]<br>";
 		
 		for ( var idx = 0; idx < valid_data_size; idx ++ ) {
+			
+			// the maximum substate for lv85 speed could be 5, but it extremely rare.
+			// so we use 4 as maximum for the report
+			var substat_max_tmp = substat_max[valid_data_type[idx]];
+			if (( getGearLevel() === "85" || getGearLevel === "90r" ) && valid_data_type[idx] === 7 ) {
+				substat_max_tmp = 4;
+			}
 
 			str = str + getSubstatName( valid_data_type[idx] ) + "跳" + enc_time[idx] + "次，共得到" + 
 				  valid_data[idx] + "點，完美值為" + 
-				  substat_max[valid_data_type[idx]] * enc_time[idx] + "點。";
+				  substat_max_tmp * enc_time[idx] + "點。";
 				  
 			if ( isReforged() ) {
 				console.log( "reforge type " + idx + " (enc_time[idx] - 1)=" + (enc_time[idx] - 1) + 
@@ -1209,9 +1244,16 @@ function report( enc_time, score ) {
 		
 		for ( var idx = 0; idx < valid_data_size; idx ++ ) {
 
+			// the maximum substate for lv85 speed could be 5, but it extremely rare.
+			// so we use 4 as maximum for the report
+            var substat_max_tmp = substat_max[valid_data_type[idx]];
+            if (( getGearLevel() === "85" || getGearLevel === "90r" ) && valid_data_type[idx] === 7 ) {
+				substat_max_tmp = 4;
+			}
+            
 			str = str + getSubstatName( valid_data_type[idx] ) + "跳" + enc_time[idx] + "次，共得到" + 
 				  valid_data[idx] + "点，完美值为" + 
-				  substat_max[valid_data_type[idx]] * enc_time[idx] + "点。";
+				  substat_max_tmp * enc_time[idx] + "点。";
 				  
 			if ( isReforged() ) {
 				console.log( "reforge type " + idx + " (enc_time[idx] - 1)=" + (enc_time[idx] - 1) + 
@@ -1236,10 +1278,17 @@ function report( enc_time, score ) {
 		str = str + "[Detail]<br>";
 		
 		for ( var idx = 0; idx < valid_data_size; idx ++ ) {
+			
+			// the maximum substate for lv85 speed could be 5, but it extremely rare.
+			// so we use 4 as maximum for the report
+			var substat_max_tmp = substat_max[valid_data_type[idx]];
+			if (( getGearLevel() === "85" || getGearLevel === "90r" ) && valid_data_type[idx] === 7 ) {
+				substat_max_tmp = 4;
+			}
 
 			str = str + getSubstatName( valid_data_type[idx] ) + " rolled " + enc_time[idx] + " times, and got " + 
 				  valid_data[idx] + " out of " + 
-				  substat_max[valid_data_type[idx]] * enc_time[idx] + " points.";
+				  substat_max_tmp * enc_time[idx] + " points.";
 				  
 			if ( isReforged() ) {
 				
