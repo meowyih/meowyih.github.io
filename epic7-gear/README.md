@@ -63,7 +63,7 @@ I am pretty sure the ranges for flat attack, flat defense and flat health are no
 |      |+0 |+3 |+6 |+9 |+12|+15|
 |------|---|---|---|---|---|---|
 |Good  |1  |1  |1  |1  |2  |3  |
-|Rare  |1  |2  |2  |3  |3  |4  |
+|Rare  |1  |2  |3  |3  |3  |4  |
 |Heroic|1  |2  |3  |4  |4  |5  |
 |Epic  |1  |2  |3  |4  |5  |6  |
 
@@ -78,7 +78,7 @@ I am pretty sure the ranges for flat attack, flat defense and flat health are no
 |         |eff%   |eff.res%|speed  |
 |---------|-------|--------|-------|
 |Lv58 - 71|3 - 7  |3 - 7   |1 - 4  |
-|Lv72 - 85|4 - 8  |4 - 8   |1 - 4  |
+|Lv72 - 85|4 - 8  |4 - 8   |1 - 4(5) (very rare)|
 |Lv86 - 99|5 - 9  |5 - 9   |2 - 5  |
 
 |         |cri.damage|cri.chance|
