@@ -28,10 +28,35 @@ window.onload = function() {
 	
 	if ( lang === 'tw' ) {
 		g_lang = 'tw';
+        document.title = "第七史詩 裝備評分工具";
 	}
 	
 	// change the substat label in the front page
-	if ( lang !== 'tw' ) {
+    else if ( lang === 'cn' ) {
+        g_lang = 'cn';
+		document.title = "第七史诗 装备评分工具";
+		document.getElementById("gwhite").innerHTML = "一般";
+		document.getElementById("gblue").innerHTML = "稀有";
+		document.getElementById("gpink").innerHTML = "英雄";
+		document.getElementById("gred").innerHTML = "传说";
+		
+		document.getElementById("label-atkper").innerHTML = "攻击力%";
+		document.getElementById("label-defper").innerHTML = "防御力%";
+		document.getElementById("label-hpper").innerHTML = "生命%";
+		document.getElementById("label-atkflat").innerHTML = "攻击力";
+		document.getElementById("label-defflat").innerHTML = "防御力";
+		document.getElementById("label-hpflat").innerHTML = "生命";
+		document.getElementById("label-critch").innerHTML = "暴击几率";
+		document.getElementById("label-critdmg").innerHTML = "暴击伤害";
+		document.getElementById("label-spd").innerHTML = "速度";
+		document.getElementById("label-eff").innerHTML = "效果命中";
+		document.getElementById("label-res").innerHTML = "效果抗性";
+		document.getElementById("label-score").innerHTML = "分数";
+		document.getElementById("btn-calc").innerHTML = "计算";
+		document.getElementById("btn-reset").innerHTML = "重置";
+	}
+    
+	else {
 		
 		document.getElementById("gwhite").innerHTML = "Good";
 		document.getElementById("gblue").innerHTML = "Rare";
@@ -53,6 +78,8 @@ window.onload = function() {
 		document.getElementById("btn-calc").innerHTML = "Calc";
 		document.getElementById("btn-reset").innerHTML = "Reset";
 	}
+    
+    
 	
 	// zh, en
 	// console.log( "lang=" + g_lang );
@@ -78,6 +105,22 @@ function getSubstatName( id ) {
 		default: return "屬性(" + id + ")";
 		}
 	}
+    else if ( g_lang === 'cn' ){
+		switch( id ) {
+		case 0: return "攻击";
+		case 1: return "防御";
+		case 2: return "生命";
+		case 3: return "命中";
+		case 4: return "抗性";
+		case 5: return "暴击伤害";
+		case 6: return "暴击机率";
+		case 7: return "速度";
+		case 8: return "攻击力数值";
+		case 9: return "防御力数值";
+		case 10: return "体力数值";
+		default: return "属性(" + id + ")";
+		}
+	}
 	else {
 		switch( id ) {
 		case 0: return "Attack%";
@@ -93,7 +136,7 @@ function getSubstatName( id ) {
 		case 10: return "HP";
 		default: return "Substat(" + id + ")";
 		}
-	}	
+    }        
 }
 
 function getGearEncLevel() {
@@ -191,7 +234,7 @@ function getSubstatMax() {
 				42, 30, 180 ];
 		case "85": case "90r":
 			return [ 8, 8, 8, 8, 8, 
-				7, 5, 5,  
+				7, 5, 5, 
 				47, 34, 202 ];
 		case "90":
 			return [ 9, 9, 9, 9, 9, 
@@ -481,6 +524,21 @@ function validate() {
 					case 10: err( "錯誤: 生命力 (" + data[idx] + ") 數值錯誤，需為正值"); break;
 				}
 			}
+            else if ( g_lang === 'cn' ) {
+				switch ( idx ) {
+					case 0: err( "错误: 攻击力 (" + data[idx] + "%) 数值错误，需为正值"); break;
+					case 1: err( "错误: 防御力 (" + data[idx] + "%) 数值错误，需为正值"); break;
+					case 2: err( "错误: 生命力 (" + data[idx] + "%) 数值错误，需为正值"); break;
+					case 3: err( "错误: 命中 (" + data[idx] + "%) 数值错误，需为正值" ); break;
+					case 4: err( "错误: 抗性 (" + data[idx] + "%) 数值错误，需为正值" ); break;
+					case 5: err( "错误: 暴击伤害 (" + data[idx] + "%) 数值错误，需为正值" ); break;
+					case 6: err( "错误: 暴击率 (" + data[idx] + "%) 数值错误，需为正值" ); break;
+					case 7: err( "错误: 速度 (" + data[idx] + ") 数值错误，需为正值" ); break;
+					case 8: err( "错误: 攻击力 (" + data[idx] + ") 数值错误，需为正值" ); break;
+					case 9: err( "错误: 防御力 (" + data[idx] + ") 数值错误，需为正值"); break;
+					case 10: err( "错误: 生命力 (" + data[idx] + ") 数值错误，需为正值"); break;
+				}
+			}
 			else {
 				switch ( idx ) {
 					case 0: err( "Error: Attack (" + data[idx] + "%) cannot be negative."); break;
@@ -521,6 +579,8 @@ function validate() {
 		if ( data[idx] > 0 && data[idx] < min ) {
 			if ( g_lang === 'tw' )
 				err( "錯誤: " + getSubstatName(idx) + " (" + data[idx] + ") 的至少要大於" + min );
+            else if ( g_lang === 'cn' )
+				err( "Error: " + getSubstatName(idx) + " (" + data[idx] + ") 的至少要大于" + min );
 			else
 				err( "Error: " + getSubstatName(idx) + " (" + data[idx] + ") must be larger than " + min );
 			return -1;
@@ -531,6 +591,8 @@ function validate() {
 	if ( totaldata != getRequiredDataCount() ) {
 		if ( g_lang === 'tw' )
 			err( "錯誤: 此裝備要求正好 " + getRequiredDataCount() + " 項屬性" );
+        else if ( g_lang === 'cn' )
+			err( "错误: 此装备要求正好 " + getRequiredDataCount() + " 项属性" );
 		else
 			err( "Error: This gear requires " + getRequiredDataCount() + " substat(s)." );
 		return -1;
@@ -766,7 +828,24 @@ function getPossibleErrorDesc( enc_time ) {
 			str = str + "目前沒有公認的白值上下限，所以也有可能是網頁設定的白值上下限錯誤。";
 		}
 	}
-	else {
+    else if ( g_lang === 'cn' ) {
+		str = "错误: 装备数据错误，请检查副属性值。";
+		
+		if ( getMinTotalEncTime( enc_time ) > getMultiplier() ) {
+			str = str + "此属性至少需要" + 
+				( getMinTotalEncTime( enc_time ) - getSubstatCount() ) + "次强化，但装备只强化了" + 
+				( getMultiplier() - getSubstatCount() ) + "次。";
+		}
+		
+		if ( gear_lv === 'lv90' ) {
+			str = str + "若装备为竞技场Lv88装备，建议视为Lv85重试。";
+		}
+		
+		if ( hasFlatSubstat ) {
+			str = str + "目前没有公认的白值上下限，所以也有可能是网页设定的白值上下限错误。";
+		}
+	}
+	else  {
 		str = "Error: Substat(s) value does not match the gear type or the enhance level.";
 		
 		if ( getMinTotalEncTime( enc_time ) > getMultiplier() ) {
@@ -1055,6 +1134,8 @@ function report( enc_time, score ) {
 
 		if ( g_lang === 'tw' )
 			str = str + "[總評] 神裝! 記得鎖起來! 此裝備需要花費 " + op_cost + " 個裝備才做得出相近的點數。<br>";
+        else if ( g_lang === 'cn' )
+			str = str + "[总评] 神装! 记得锁起来! 此装备需要花费 " + op_cost + " 个装备才做得出相近的点数。<br>";
 		else 
 			str = str + "[Summary] Godlike gear! Don't forget to lock it. You need to spend " + op_cost + " gears to come out a similar one.<br>";
 	}
@@ -1064,6 +1145,8 @@ function report( enc_time, score ) {
 		
 		if ( g_lang === 'tw' ) 
 			str = str + "[總評] 還不錯，建議留下。此裝備需要花費 " + op_cost + " 個裝備才做得出相近的點數。<br>";
+        else if ( g_lang === 'cn' ) 
+			str = str + "[总评] 还不错，建议留下。此装备需要花费 " + op_cost + " 个装备才做得出相近的点数。<br>";
 		else 
 			str = str + "[Summary] Not bad. You should keep it. You need to spend " + op_cost + " gears to come out a similar one.<br>";
 	}
@@ -1080,6 +1163,19 @@ function report( enc_time, score ) {
 			}
 			
 			str = str + "很高，可以留下。此裝備需要花費 " + op_cost + " 個裝備才做得出相近的點數。<br>";
+		}
+        else if ( g_lang === 'cn' ) {
+			str = str + "[总评] 虽然装备潜能值未达" + getScoreThreshold() + "%，但" + getSubstatName( valid_data_high_score_idx[0] );
+			
+			for ( var idx = 1; idx < valid_data_high_score_count; idx ++ ) {
+				str = str + ", " + getSubstatName( valid_data_high_score_idx[idx] );
+			}
+				
+			if ( valid_data_high_score_count > 1 ) {
+					str = str + "都";
+			}
+			
+			str = str + "很高，可以留下。此装备需要花费 " + op_cost + " 个装备才做得出相近的点数。<br>";
 		}
 		else {
 			str = str + "[Summary] Although the score is not very high, it has a good roll in " +
@@ -1099,6 +1195,8 @@ function report( enc_time, score ) {
 	else {
 		if ( g_lang === 'tw' ) 
 			str = str + "[總評] 如果不缺裝備，建議賣掉。此裝備需要花費 " + op_cost + " 個裝備才做得出相近的點數。<br>";
+        else if ( g_lang === 'cn' ) 
+			str = str + "[总评] 如果不缺装备，建议卖掉。此装备需要花费 " + op_cost + " 个装备才做得出相近的点数。<br>";
 		else
 			str = str + "[Summary] Sell it if you are lack of inventory. You need to spend " + op_cost + " gears to come out a similar one.<br>";
 	}
@@ -1134,6 +1232,41 @@ function report( enc_time, score ) {
 			else {				  
 				if ( valid_data[idx] > substat_max[valid_data_type[idx]] * enc_time[idx] ) {
 					str = str + '<span style="font-color: red">警告: 數值超過最大值。</span>';
+				}
+			}
+			
+			str = str + '<br>';
+		}
+	}
+    else if ( g_lang === 'cn' ) {
+		str = str + "[总分] 装备得分为 " +  int_score + " 分，满分为 " + max_score + " 分，开发了 " + percent_score + " % 的潜能。<br>";
+		str = str + "[跳点]<br>";
+		
+		for ( var idx = 0; idx < valid_data_size; idx ++ ) {
+
+			// the maximum substate for lv85 speed could be 5, but it extremely rare.
+			// so we use 4 as maximum for the report
+            var substat_max_tmp = substat_max[valid_data_type[idx]];
+            if (( getGearLevel() === "85" || getGearLevel === "90r" ) && valid_data_type[idx] === 7 ) {
+				substat_max_tmp = 4;
+			}
+            
+			str = str + getSubstatName( valid_data_type[idx] ) + "跳" + enc_time[idx] + "次，共得到" + 
+				  valid_data[idx] + "点，完美值为" + 
+				  substat_max_tmp * enc_time[idx] + "点。";
+				  
+			if ( isReforged() ) {
+				console.log( "reforge type " + idx + " (enc_time[idx] - 1)=" + (enc_time[idx] - 1) + 
+				   " getReforge( enc_time[idx] - 1 )[idx]" + getReforge( enc_time[idx] - 1 )[valid_data_type[idx]] );
+				str = str + "重铸点数" + getReforge( enc_time[idx] - 1 )[valid_data_type[idx]] + "点。";
+
+				if ( valid_data[idx] > substat_max[valid_data_type[idx]] * enc_time[idx] + getReforge( enc_time[idx] - 1 )[valid_data_type[idx]] ) {
+					str = str + '<span style="font-color: red">警告: 数值超过最大值。</span>';
+				}
+			}
+			else {				  
+				if ( valid_data[idx] > substat_max[valid_data_type[idx]] * enc_time[idx] ) {
+					str = str + '<span style="font-color: red">警告: 数值超过最大值。</span>';
 				}
 			}
 			
