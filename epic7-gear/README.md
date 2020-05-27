@@ -91,7 +91,7 @@ I am pretty sure the ranges for flat attack, flat defense and flat health are no
 |         |flat attack|flat defense|flat health|
 |---------|-----------|------------|-----------|
 |Lv58 - 71|28 - 42    |23 - 30     |124 - 180  |
-|Lv72 - 85|30 - 46    |25 - 33     |147 - 200  |
+|Lv72 - 85|30 - 46    |25 - 33     |147 - 202  |
 |Lv86 - 99|32 - 50    |27 - 36     |170 - 220  |
 
 ## Reforge (Lv90)
