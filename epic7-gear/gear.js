@@ -235,12 +235,12 @@ function getSubstatMin() {
 // 8. atk flat, 9. def flat, 10. hp flat
 function getReforge( roll ) {
 	switch( roll ) {
-		case 0: return [ 1, 1, 1, 1, 1, 1, 1, 0, 12,  9, 50 ];
+		case 0: return [ 1, 1, 1, 1, 1, 1, 1, 0, 11,  9, 56 ];
 		case 1: return [ 3, 3, 3, 3, 3, 2, 2, 1, 18, 14, 81 ];
 		case 2: return [ 4, 4, 4, 4, 4, 3, 3, 2, 24, 20, 112 ];
 		case 3: return [ 5, 5, 5, 5, 5, 4, 4, 3, 30, 25, 147 ];
 		case 4: return [ 7, 7, 7, 7, 7, 5, 5, 4, 38, 29, 173 ];
-		case 5: return [ 8, 8, 8, 8, 8, 6, 6, 5, 46, 33, 200 ];
+		case 5: return [ 8, 8, 8, 8, 8, 6, 6, 5, 47, 34, 202 ];
 		default: return [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 	}
 }
