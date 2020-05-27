@@ -118,9 +118,9 @@ The table for flat attack/defense/health is wrong. We use some estimate number t
 
 |       |flat attack|flat defense|flat health|
 |-------|-----------|------------|-----------|
-|0 roll |+12        |+9          |+50        |
+|0 roll |+11        |+9          |+56        |
 |1 roll |+18        |+14         |+81        |
 |2 rolls|+24        |+20         |+112       |
 |3 rolls|+30        |+25         |+147       |
 |4 rolls|+38        |+29         |+173       |
-|5 rolls|+46        |+33         |+200       |
+|5 rolls|+47        |+34         |+202       |
