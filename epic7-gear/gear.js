@@ -239,7 +239,7 @@ function getSubstatMax() {
 		case "90":
 			return [ 9, 9, 9, 9, 9, 
 				8, 6, 5, 
-				50, 36, 220 ];			
+				50, 37, 220 ];			
 	}
 	
 	alert( "fatal error in getSubstatMax()" );
