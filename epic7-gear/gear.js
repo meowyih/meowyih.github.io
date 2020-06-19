@@ -35,6 +35,13 @@ window.onload = function() {
     else if ( lang === 'cn' ) {
         g_lang = 'cn';
 		document.title = "第七史诗 装备评分工具";
+        document.getElementsByTagName('meta')["keywords"].content = "第七史诗装备评分器,第七史诗装备计算器,e7装备评分器,epic7装备评分器,epic seven装备评分器";
+        document.getElementsByTagName('meta')["description"].content = "第七史诗 装备评分计算器，计算装备副属性强化的好坏程度";
+        
+        document.getElementById("lv85").innerHTML = "Lv72 - 85 (竞技场88套)";
+        document.getElementById("lv90").innerHTML = "Lv86 - 99 (迷宫88套)";
+        document.getElementById("lv90r").innerHTML = "Lv90 重铸";
+        
         document.getElementById("label-gear-lv").innerHTML = "装备等级";
         document.getElementById("label-gear-type").innerHTML = "装备稀有度";
         document.getElementById("label-gear-enc-lv").innerHTML = "装备强化等级";
@@ -74,6 +81,14 @@ window.onload = function() {
 	}
     
 	else {
+        document.title = "Epic7 Gear's Substat";
+        document.getElementsByTagName('meta')["keywords"].content = "Epic7 Gear's Substat,e7 Gear's Substat,epic seven Gear's Substat";
+        document.getElementsByTagName('meta')["description"].content = "Epic7 Gear's Substat,calculate the score of gear's substats rolls";
+        
+        document.getElementById("lv85").innerHTML = "Lv72 - 85 (Arena lv.88 gears)";
+        document.getElementById("lv90").innerHTML = "Lv86 - 99 (Labyrinth lv.88 gears)";
+        document.getElementById("lv90r").innerHTML = "Lv90 Reforged";
+        
         document.getElementById("label-gear-lv").innerHTML = "Gear Level";
         document.getElementById("label-gear-type").innerHTML = "Gear Rarity";
         document.getElementById("label-gear-enc-lv").innerHTML = "Gear Enhance Level";
