@@ -35,10 +35,27 @@ window.onload = function() {
     else if ( lang === 'cn' ) {
         g_lang = 'cn';
 		document.title = "第七史诗 装备评分工具";
+        document.getElementById("label-gear-lv").innerHTML = "装备等级";
+        document.getElementById("label-gear-type").innerHTML = "装备稀有度";
+        document.getElementById("label-gear-enc-lv").innerHTML = "装备强化等级";
+        document.getElementById("label-usef-sub").innerHTML = "有效副属性";
+        
 		document.getElementById("gwhite").innerHTML = "一般";
 		document.getElementById("gblue").innerHTML = "稀有";
 		document.getElementById("gpink").innerHTML = "英雄";
 		document.getElementById("gred").innerHTML = "传说";
+        
+        document.getElementById("gus-atkper").innerHTML = "攻击力%";
+		document.getElementById("gus-defper").innerHTML = "防御力%";
+		document.getElementById("gus-hpper").innerHTML = "生命%";
+		document.getElementById("gus-atkflat").innerHTML = "攻击力";
+		document.getElementById("gus-defflat").innerHTML = "防御力";
+		document.getElementById("gus-hpflat").innerHTML = "生命";
+		document.getElementById("gus-critch").innerHTML = "暴击几率";
+		document.getElementById("gus-critdmg").innerHTML = "暴击伤害";
+		document.getElementById("gus-spd").innerHTML = "速度";
+		document.getElementById("gus-eff").innerHTML = "效果命中";
+		document.getElementById("gus-res").innerHTML = "效果抗性";
 		
 		document.getElementById("label-atkper").innerHTML = "攻击力%";
 		document.getElementById("label-defper").innerHTML = "防御力%";
@@ -57,11 +74,27 @@ window.onload = function() {
 	}
     
 	else {
+        document.getElementById("label-gear-lv").innerHTML = "Gear Level";
+        document.getElementById("label-gear-type").innerHTML = "Gear Rarity";
+        document.getElementById("label-gear-enc-lv").innerHTML = "Gear Enhance Level";
+        document.getElementById("label-usef-sub").innerHTML = "Prioritizing Substats";
 		
 		document.getElementById("gwhite").innerHTML = "Good";
 		document.getElementById("gblue").innerHTML = "Rare";
 		document.getElementById("gpink").innerHTML = "Heroic";
 		document.getElementById("gred").innerHTML = "Epic";
+        
+        document.getElementById("gus-atkper").innerHTML = "Attack%";
+		document.getElementById("gus-defper").innerHTML = "Defence%";
+		document.getElementById("gus-hpper").innerHTML = "Health%";
+		document.getElementById("gus-atkflat").innerHTML = "Attack";
+		document.getElementById("gus-defflat").innerHTML = "Defence";
+		document.getElementById("gus-hpflat").innerHTML = "Health";
+		document.getElementById("gus-critch").innerHTML = "Cri.Chance";
+		document.getElementById("gus-critdmg").innerHTML = "Cri.Damage";
+		document.getElementById("gus-spd").innerHTML = "Speed";
+		document.getElementById("gus-eff").innerHTML = "Effectiveness";
+		document.getElementById("gus-res").innerHTML = "Eff.Resist";
 		
 		document.getElementById("label-atkper").innerHTML = "Attack%";
 		document.getElementById("label-defper").innerHTML = "Defence%";
@@ -218,6 +251,17 @@ function getGearLevel() {
 	}
 	
 	return "0";
+}
+
+function getGearUsefulSub() {
+	
+	var select = document.getElementById("gear-usef-sub");
+	var options = select.options;
+	var selected = [];
+	for (var i = 0; i < select.length; i++) {
+        if (select.options[i].selected) selected.push(select.options[i].value);
+    }	
+	return selected;
 }
 
 // 0. atk%, 1. def%, 2. hp%, 3. eff%, 4. res%
@@ -968,6 +1012,7 @@ function calcScore( enc_time ) {
 	var data = getSubstat();
 	var substat_min = getSubstatMin();
 	var substat_max = getSubstatMax();
+    var usef_sub = getGearUsefulSub();
 	var enc_idx = 0;
 	var score = 0;
 	var has_score = false;
@@ -1005,6 +1050,47 @@ function calcScore( enc_time ) {
 			// console.log( "calcScore, cut the score type " + getSubstatName(idx) + " from " + tmp + " to " + ( tmp / 2 ));
 			tmp = tmp / 2;
 		}
+        
+        // cut the score to zero if it is not a useful substats
+        // 0. atk%, 1. def%, 2. hp%, 3. eff%, 4. res%
+	    // 5. critdmg
+	    // 6. critch
+	    // 7. spd
+	    // 8. atk flat, 9. def flat, 10. hp flat
+        if (idx === 0 && !usef_sub.includes("gus-atkper") ){
+            tmp = 0;
+        }
+        if (idx === 1 && !usef_sub.includes("gus-defper") ){
+            tmp = 0;
+        }
+        if (idx === 2 && !usef_sub.includes("gus-hpper") ){
+            tmp = 0;
+        }
+        if (idx === 3 && !usef_sub.includes("gus-eff") ){
+            tmp = 0;
+        }
+        if (idx === 4 && !usef_sub.includes("gus-res") ){
+            tmp = 0;
+        }
+        if (idx === 5 && !usef_sub.includes("gus-critdmg") ){
+            tmp = 0;
+        }
+        if (idx === 6 && !usef_sub.includes("gus-critch") ){
+            tmp = 0;
+        }
+        if (idx === 7 && !usef_sub.includes("gus-spd") ){
+            tmp = 0;
+        }
+        if (idx === 8 && !usef_sub.includes("gus-atkflat") ){
+            tmp = 0;
+        }
+        if (idx === 9 && !usef_sub.includes("gus-defflat") ){
+            tmp = 0;
+        }
+        if (idx === 10 && !usef_sub.includes("gus-hpflat") ){
+            tmp = 0;
+        }
+        
 			
 		// console.log( "score data[" + getSubstatName(idx) + "]" + data[idx] +
 		//  " substat_min:" + substat_min[idx] +
