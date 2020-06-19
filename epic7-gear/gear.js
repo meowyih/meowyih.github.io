@@ -29,6 +29,8 @@ window.onload = function() {
 	if ( lang === 'tw' ) {
 		g_lang = 'tw';
         document.title = "第七史詩 裝備評分工具";
+        document.getElementsByTagName('meta')["keywords"].content = "第七史詩裝備評分器,第七史詩裝備計算器,e7裝備評分器,epic7裝備評分器,epic seven裝備評分器";
+        document.getElementsByTagName('meta')["description"].content = "第七史詩 裝備評分計算器，計算裝備副屬性強化的好壞程度";
 	}
 	
 	// change the substat label in the front page
