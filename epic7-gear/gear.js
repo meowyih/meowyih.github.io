@@ -47,12 +47,19 @@ window.onload = function() {
         document.getElementById("label-gear-lv").innerHTML = "装备等级";
         document.getElementById("label-gear-type").innerHTML = "装备稀有度";
         document.getElementById("label-gear-enc-lv").innerHTML = "装备强化等级";
+        document.getElementById("label-sub-presets").innerHTML = "有效副属性预设值";
         document.getElementById("label-usef-sub").innerHTML = "有效副属性";
         
 		document.getElementById("gwhite").innerHTML = "一般";
 		document.getElementById("gblue").innerHTML = "稀有";
 		document.getElementById("gpink").innerHTML = "英雄";
 		document.getElementById("gred").innerHTML = "传说";
+        
+        document.getElementById("gus-all").innerHTML = "全选";
+        document.getElementById("gus-dd").innerHTML = "纯输出";
+        document.getElementById("gus-tank").innerHTML = "坦克";
+        document.getElementById("gus-debuffer").innerHTML = "debuff手";
+        document.getElementById("gus-healer").innerHTML = "奶妈";
         
         document.getElementById("gus-atkper").innerHTML = "攻击力%";
 		document.getElementById("gus-defper").innerHTML = "防御力%";
@@ -94,12 +101,19 @@ window.onload = function() {
         document.getElementById("label-gear-lv").innerHTML = "Gear Level";
         document.getElementById("label-gear-type").innerHTML = "Gear Rarity";
         document.getElementById("label-gear-enc-lv").innerHTML = "Gear Enhance Level";
+        document.getElementById("label-sub-presets").innerHTML = "Presets";
         document.getElementById("label-usef-sub").innerHTML = "Prioritizing Substats";
 		
 		document.getElementById("gwhite").innerHTML = "Good";
 		document.getElementById("gblue").innerHTML = "Rare";
 		document.getElementById("gpink").innerHTML = "Heroic";
 		document.getElementById("gred").innerHTML = "Epic";
+        
+        document.getElementById("gus-all").innerHTML = "Select All";
+        document.getElementById("gus-dd").innerHTML = "Damage Dealer";
+        document.getElementById("gus-tank").innerHTML = "Tank";
+        document.getElementById("gus-debuffer").innerHTML = "Debuffer";
+        document.getElementById("gus-healer").innerHTML = "Cleanser";
         
         document.getElementById("gus-atkper").innerHTML = "Attack%";
 		document.getElementById("gus-defper").innerHTML = "Defence%";
@@ -270,6 +284,36 @@ function getGearLevel() {
 	return "0";
 }
 
+// apply presets value to GearUsefulSub dropdown menu
+function setGearUsefulSub() { 
+    var select = document.getElementById("gear-sub-presets");
+	var options = select.options;
+	var selected = options[options.selectedIndex].id;
+    
+    if (selected === "gus-all") {
+    sublist=["gus-all","gus-atkper","gus-defper","gus-hpper","gus-atkflat","gus-defflat","gus-hpflat","gus-critch","gus-critdmg","gus-spd","gus-eff","gus-res"];
+    $("#gear-usef-sub").selectpicker('val', sublist);
+    }
+    if (selected === "gus-dd") {
+    sublist=["gus-dd","gus-atkper","gus-atkflat","gus-critch","gus-critdmg"];
+    $("#gear-usef-sub").selectpicker('val', sublist);
+    }
+    if (selected === "gus-tank") {
+    sublist=["gus-tank","gus-defper","gus-hpper","gus-defflat","gus-hpflat","gus-spd"];
+    $("#gear-usef-sub").selectpicker('val', sublist);
+    }
+    if (selected === "gus-debuffer") {
+    sublist=["gus-debuffer","gus-defper","gus-hpper","gus-defflat","gus-hpflat","gus-spd","gus-eff"];
+    $("#gear-usef-sub").selectpicker('val', sublist);
+    }
+    if (selected === "gus-healer") {
+    sublist=["gus-healer","gus-defper","gus-hpper","gus-defflat","gus-hpflat","gus-spd","gus-res"];
+    $("#gear-usef-sub").selectpicker('val', sublist);
+    }   
+	return 0;
+}
+
+
 function getGearUsefulSub() {
 	
 	var select = document.getElementById("gear-usef-sub");
@@ -277,7 +321,7 @@ function getGearUsefulSub() {
 	var selected = [];
 	for (var i = 0; i < select.length; i++) {
         if (select.options[i].selected) selected.push(select.options[i].value);
-    }	
+    }
 	return selected;
 }
 
