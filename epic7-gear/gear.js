@@ -340,7 +340,7 @@ function getSubstatMax() {
 		case "85": case "90r":
 			return [ 8, 8, 8, 8, 8, 
 				7, 5, 5, 
-				47, 34, 205 ];
+				47, 34, 212 ];
 		case "90":
 			return [ 9, 9, 9, 9, 9, 
 				8, 6, 5, 
