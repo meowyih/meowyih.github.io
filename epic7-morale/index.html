@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+<script src="data.js"></script>
+<title>Epic7 Data Sheet</title>
+</head>
+
+<body onload="initialize()">
+<p id='p_header'></p>
+<select id="select_mandatory" onchange="onchange_select_mandatory()">
+</select>
+<ol id="list_mandatory">
+    <li id="list_mandatory_0" onclick="onclick_list_mandatory(this)"></li>
+    <li id="list_mandatory_1" onclick="onclick_list_mandatory(this)"></li>
+    <li id="list_mandatory_2" onclick="onclick_list_mandatory(this)"></li>
+    <li id="list_mandatory_3" onclick="onclick_list_mandatory(this)"></li>
+</ol>
+<select id="select_ban" onchange="onchange_select_ban()">
+</select>
+<ul id="list_ban">
+</ul>
+<button id="btn_calc" onclick="onclick_calc()">Calc</button>
+<p id="p_info"></p>
+<div id="div_result"></div>
+</body>
+</html>
