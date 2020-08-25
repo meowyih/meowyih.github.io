@@ -38,7 +38,6 @@ function initialize()
                      'This tool will calculate all the possible combinations with positive morale score.\n\n';
     p_header_text += 'Known issue: Kikirat v2 does not have camping information\n';
         
-        
     p_header.innerText = p_header_text;
     
     // create 50 buckets
@@ -332,6 +331,8 @@ function morale_single_topic( topic, audiences )
         }
     }
     
+    // console.log( score + ' morale_single_topic(' + topic + ',' + audiences[0] + ',' + audiences[1] + ',' + audiences[2] + ')' );
+    
     return score;
 }
 
@@ -358,6 +359,8 @@ async function morale_teams( members )
         team = [ members[0], members[1], members[2], members[3] ];
         
         var morale = morale_team( team, params );
+        
+        console.log( 'morale_team return ' + morale );
         
         add_bucket( team, params, morale );
     }
@@ -397,9 +400,7 @@ async function morale_teams( members )
         
         // try all the combination
         for ( var i = 0; i < g_heroes.length; i ++ )
-        {
-            var params = [];
-            
+        {            
             if ( contains( g_heroes[i]['name'], team ))
                 continue;
             
@@ -409,7 +410,7 @@ async function morale_teams( members )
             team.push( g_heroes[i]['name'] );
             
             for ( var j = i + 1; j < g_heroes.length; j ++ )
-            {                
+            {               
                 if ( contains( g_heroes[j]['name'], team ))
                     continue;
                 
@@ -418,6 +419,7 @@ async function morale_teams( members )
                 
                 team.push( g_heroes[j]['name'] );
                 
+                var params = [];
                 var morale = morale_team( team, params );
                 
                 add_bucket( team, params, morale );                
@@ -600,16 +602,14 @@ function morale_team( members, params )
     var h1_score, h2_score;
     var h1_topic, h2_topic;
     var h1_speaker, h2_speaker;
+    var combination = [];
         
     for ( var i = 0; i < 4; i ++ )
     {
         var speaker = g_mapping[members[i]];
         var topics = speaker["camping"]["topics"];
         var audiences = [];
-        var score1, score2;
-        var topic1, topic2;
-        var speaker1, speaker2;
-        var tmp;       
+        var score;      
         
         for ( var j = 0; j < 4; j ++ )
         {
@@ -619,77 +619,45 @@ function morale_team( members, params )
             }
         }
         
-        score1 = morale_single_topic( topics[0], audiences );
-        topic1 = topics[0];
-        speaker1 = speaker['name'];
-        score2 = morale_single_topic( topics[1], audiences );
-        topic2 = topics[1];
-        speaker2 = speaker['name'];
-                
-        if ( score1 < score2 )
-        {
-            // switch
-            tmp = score1;
-            score1 = score2;
-            score2 = tmp;
-            
-            tmp = topic1;
-            topic1 = topic2;
-            topic2 = tmp;
-        }
-                
-        if ( i == 0 )
-        {
-            h1_score = score1;
-            h1_speaker = speaker1;
-            h1_topic = topic1;
-            
-            h2_score = score2;
-            h2_speaker = speaker2;
-            h2_topic = topic2;
-            continue;
-        }        
-        
-        // sorting
-        if ( h1_score >= score1 )
-        {
-            if ( h2_score >= score1 )
-            {
-                // do nothing
-            }
-            else // h2_score < score1
-            {
-                h2_score = score1;
-                h2_speaker = speaker1;
-                h2_topic = topic1;
-            }
-        }
-        else // h1_score < score1
-        {
-            if ( h1_score >= score2 )
-            {
-                h2_score = h1_score;
-                h2_topic = h1_topic;
-                h2_speaker = h1_speaker;
-                
-                h1_score = score1; 
-                h1_topic = topic1;
-                h1_speaker = speaker1;
-            }
-            else
-            {
-                h1_score = score1;
-                h1_topic = topic1;
-                h1_speaker = speaker1;
-                
-                h2_score = score2;
-                h2_topic = topic2;
-                h2_speaker = speaker2;
-            }
-        }       
+        // console.log( 'speaker ' + speaker['name'] + ':' + topics[0] + ':' + topics[1] );
+        score = morale_single_topic( topics[0], audiences );
+        combination.push( [score, speaker['name'], topics[0], audiences[0], audiences[1], audiences[2]] );
+
+        score = morale_single_topic( topics[1], audiences );
+        combination.push( [score, speaker['name'], topics[1], audiences[0], audiences[1], audiences[2]] );       
     }
     
-    params.push( h1_speaker, h1_topic, h2_speaker, h2_topic );
+    // find highest score in combination
+    var first_high = 0;
+    for ( var i = 1; i < combination.length; i ++ )
+    {        
+        if ( combination[i][0] > combination[first_high][0] )
+        {
+            first_high = i;
+        }
+    }
     
-    return ( h1_score + h2_score );
+    // find second highest score in combination
+    // combination[0] and [1] must be different topic from same speaker
+    var second_high;
+    
+    if ( first_high === 0 )
+        second_high = 1;
+    else
+        second_high = 0;
+    
+    for ( var i = 0; i < combination.length; i ++ )
+    {
+        if ( i !== first_high && i !== second_high &&
+             combination[i][0] > combination[second_high][0] &&
+             combination[i][2] !== combination[first_high][2] )
+        {
+            second_high = i;
+        }
+    }
+    
+    params.push( combination[first_high][1],  combination[first_high][2], 
+                 combination[second_high][1], combination[second_high][2] );
+    
+    return ( combination[first_high][0] + combination[second_high][0] );
 }
