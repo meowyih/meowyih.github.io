@@ -3,7 +3,7 @@ var g_raw_text = '{"heroes":[{"id":"c1100","name":"Alencia","rarity":5,"attribut
 var g_raw;
 
 // json, hero list from epic7 DB
-var g_heroes;
+var g_heroes = [];
 
 // convenient mappinng between character's name and data
 var g_mapping = {};
@@ -14,6 +14,7 @@ var g_buckets = [];
 // the characters' name that user does not want in their team
 var g_blacklist = [];
 
+// init when loading the page
 function initialize()
 {
     var select_mandatory = document.getElementById('select_mandatory');
@@ -30,6 +31,8 @@ function initialize()
     
     // init header
     var p_header = document.getElementById('p_header');
+    
+    // TODO: put this header text into external string table
     var p_header_text = 'All heroes\' data was pulled from epic7 database api (https://epicsevendb.com/),' +
         ' pull date:' + g_raw['meta']['requestDate'] + '\n\n';
     
@@ -37,7 +40,7 @@ function initialize()
                      'that you does not to see in your team if you want. Then press "calc" button. ' + 
                      'This tool will calculate all the possible combinations with positive morale score.\n\n';
     p_header_text += 'Known issue: Kikirat v2 does not have camping information\n';
-        
+
     p_header.innerText = p_header_text;
     
     // create 50 buckets
@@ -66,8 +69,11 @@ function initialize()
     }
     
     sort_select();
+    
+    // TODO: translate g_heroes using external string table    
 } 
 
+// reset all results 
 function clear_bucket()
 {
     // create 50 buckets
@@ -124,6 +130,7 @@ function onclick_calc()
     morale_teams( team );
 }
 
+// sort two select element 
 function sort_select()
 {
     var select_mandatory = document.getElementById('select_mandatory');
@@ -267,6 +274,7 @@ function onchange_select_mandatory()
     }
 }
 
+// UI, mandatory list event
 function onclick_list_mandatory(item)
 {
     var item_id = item.getAttribute('id');
@@ -336,11 +344,14 @@ function morale_single_topic( topic, audiences )
     return score;
 }
 
+// try not to freeze the browser when running a huge loop
 async function sleep(ms = 0) 
 {
     return new Promise(r => setTimeout(r, ms));
 }
 
+// calculate the morale and put result into bucket
+// members could be 1 ~ 4 heroes' name
 async function morale_teams( members )
 {
     for ( var i = 0; i < g_blacklist.length; i ++ )
@@ -537,6 +548,7 @@ async function morale_teams( members )
     }
 }
 
+// if 'item' exist in 'list'
 function contains( item, list )
 {
     for ( var i = 0; i < list.length; i ++ )
@@ -548,6 +560,7 @@ function contains( item, list )
     return false;
 }
 
+// add a team combination into one bucket based on morale value
 function add_bucket( team, params, morale )
 {
     if ( morale >= 0 )
@@ -569,34 +582,6 @@ function add_bucket( team, params, morale )
 //    var params = [];
 //    var members = ["Aither", "Alexa", "Adlay", "Angelica"];
 //    console.log( morale_team( members, params ) );
-// Unit test: Try all combination of a team
-/*
-var members = ["Aither", "Alexa", "Adlay", "Angelica"];
-var params = [];
-for ( var i = 0; i < 4; i ++ )
-{
-    for ( var j = 0; j < 4; j ++ )
-    {
-        for ( var k = 0; k < 4; k ++ )
-        {
-            for ( var l = 0; l < 4; l ++ )
-            {
-                if ( i == j || i == k || i == l ||
-                     j == k || j == l ||
-                     k == l )
-                {
-                    continue;
-                }
-                
-                var team = [ members[i], members[j], members[k], members[l] ];
-                console.log( "morale:" + morale_team( team, params ) );
-                console.log( "speaker 1:" + params[0] + " topic1:" + params[1] );
-                console.log( "speaker 2:" + params[2] + " topic2:" + params[3] );
-            }
-        }
-    }
-}
-*/
 function morale_team( members, params )
 {
     var h1_score, h2_score;
@@ -660,4 +645,36 @@ function morale_team( members, params )
                  combination[second_high][1], combination[second_high][2] );
     
     return ( combination[first_high][0] + combination[second_high][0] );
+}
+
+// generate string table json template
+// check for string_table_tw.js for the detail format
+// { 
+//     "heroes": ["Alencia":"", "Alexa":"" ...],
+//     "topics": ["Belief":"", "Complain":"" ...]
+// }
+function generate_i18n_json_template()
+{
+    var json = {};
+    
+    json["heroes"] = [];
+    json["topics"] = [];
+
+    for ( var i = 0; i < g_heroes.length; i ++ )
+    {
+        var name = g_heroes[i].name;
+        var element = {};
+        element[name] = '';
+        json["heroes"].push( element );
+    }
+    var keys = Object.keys( g_heroes[0].camping.values );
+    
+    for ( var i = 0; i < keys.length ; i ++ )
+    {
+        var element = {};
+        element[keys[i]] = '';
+        json["topics"].push( element );
+    }
+    
+    console.log( JSON.stringify( json, null, 4 ));
 }
