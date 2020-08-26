@@ -23,6 +23,12 @@ function initialize()
     select_mandatory.options[select_mandatory.options.length] 
             = new Option("--- select mandatory hero ---", "--- select mandatory hero ---");
     
+    select_mandatory.options[select_mandatory.options.length] 
+            = new Option("---- Role: Knight ----", "---- Role: Knight ----");
+            
+    select_mandatory.options[select_mandatory.options.length] 
+            = new Option("---- Role: Soul Weaver ----", "---- Role: Soul Weaver ----");
+    
     select_ban.options[select_ban.options.length] 
             = new Option("--- select banned hero ---", "--- select banned hero ---");    
             
@@ -69,8 +75,9 @@ function initialize()
     }
     
     sort_select();
+
+    // TODO: translate g_heroes using external string table
     
-    // TODO: translate g_heroes using external string table    
 } 
 
 // reset all results 
@@ -98,6 +105,14 @@ function onclick_calc()
     while (div_result.firstChild) 
     {
         div_result.removeChild(div_result.lastChild);
+    }
+    
+    name = document.getElementById( 'list_mandatory_0' ).innerText;
+    
+    if ( name === '---- Role: Knight ----' || name === '--- Role: Soul Weaver ----' )
+    {
+        document.getElementById('p_info').innerText = 'Error: Require at least one specific hero.';
+        return; 
     }
 
     for ( var idx = 0; idx < 4; idx ++ )
@@ -260,11 +275,50 @@ function onchange_select_mandatory()
     else
     {
         return;
-    }
+    }   
     
     list_item.innerText = name;
+    if ( name[0] === '-' )
+    {
+        select_mandatory.selectedIndex = 0;        
+    }
     
-    // remove name from select_mandatory
+    var listname = [];
+    var listrole = [];
+    for ( var i = 0; i < 4; i ++ )
+    {
+        var text = document.getElementById('list_mandatory_' + i).innerText;
+        if ( text.length == 0 )
+        {
+            break;
+        }
+        
+        if ( text === '---- Role: Knight ----' || text === '---- Role: Soul Weaver ----' )
+        {
+            listrole.push( text )
+        }
+        else
+        {
+            listname.push( text );
+        }
+    }
+    
+    for ( var i = 0; i < listname.length; i ++ )
+    {
+        document.getElementById('list_mandatory_' + i).innerText = listname[i];
+    }
+    
+    for ( var i = (listname.length); i < (listrole.length + listname.length); i ++ )
+    {
+        document.getElementById('list_mandatory_' + i).innerText = listrole[i - listname.length];
+    }
+    
+    // remove name from select_mandatory if name is not a role
+    if ( name[0] === '-' )
+    {
+        return;
+    }
+
     for (var i = 0; i < select_mandatory.length; i++) 
     {
         if ( select_mandatory.options[i].value == name )
@@ -286,8 +340,11 @@ function onclick_list_mandatory(item)
         return;
     }
     
-    select_mandatory.options[select_mandatory.options.length] 
-        = new Option(name, name);
+    if ( name !== '---- Role: Knight ----' && name !== '---- Role: Soul Weaver ----' )
+    {
+        select_mandatory.options[select_mandatory.options.length] 
+            = new Option(name, name);
+    }
         
     sort_select();
     
@@ -344,6 +401,30 @@ function morale_single_topic( topic, audiences )
     return score;
 }
 
+function check_role( team, require_knight, require_soulweaver )
+{
+    var soulweaver = 0;
+    var knight = 0;
+    for ( var i = 0; i < team.length; i ++ )
+    {
+        if ( g_mapping[team[i]].role === 'manauser' )
+        {
+            soulweaver ++;
+        }
+        else if ( g_mapping[team[i]].role === 'knight' )
+        {
+            knight ++;
+        }
+    }
+    
+    if ( knight >= require_knight && soulweaver >= require_soulweaver )
+    {
+        return true;
+    }
+    
+    return false;
+}
+
 // try not to freeze the browser when running a huge loop
 async function sleep(ms = 0) 
 {
@@ -353,16 +434,41 @@ async function sleep(ms = 0)
 // calculate the morale and put result into bucket
 // members could be 1 ~ 4 heroes' name
 async function morale_teams( members )
-{
-    for ( var i = 0; i < g_blacklist.length; i ++ )
-    {
-        console.log( 'morale_teams ban ' + i + ':' + g_blacklist[i] );
-    }
-    
+{    
     var team = [];
+    var require_knight = 0;
+    var require_soulweaver = 0;
+    
     if ( members.length == 0 )
         return;
     
+    for ( var i = members.length - 1; i >= 0; i -- )
+    {
+        name = members[i];
+        
+        if ( name === '---- Role: Knight ----' )
+        {
+            require_knight ++;
+            members.splice( i, 1 );
+        }
+        else if ( name === '---- Role: Soul Weaver ----' )
+        {
+            require_soulweaver ++;
+            members.splice( i, 1 );
+        }
+        else
+        {
+            if ( g_mapping[ members[i] ].role === 'manauser' )
+            {
+                require_soulweaver ++;
+            }
+            else if ( g_mapping[ members[i] ].role === 'knight' )
+            {
+                require_knight ++;
+            }
+        }
+    }
+        
     if ( members.length == 4 )
     {
         var params = [];
@@ -395,7 +501,8 @@ async function morale_teams( members )
             
             var morale = morale_team( team, params );
             
-            add_bucket( team, params, morale );
+            if ( check_role( team, require_knight, require_soulweaver ))
+                add_bucket( team, params, morale );
             
             team.splice( 3, 1 );
         }
@@ -433,7 +540,9 @@ async function morale_teams( members )
                 var params = [];
                 var morale = morale_team( team, params );
                 
-                add_bucket( team, params, morale );                
+                if ( check_role( team, require_knight, require_soulweaver ))
+                    add_bucket( team, params, morale );
+                
                 team.splice( 3, 1 );
             }
             
@@ -483,7 +592,8 @@ async function morale_teams( members )
                     var params = [];
                     var morale = morale_team( team, params );
                 
-                    add_bucket( team, params, morale ); 
+                    if ( check_role( team, require_knight, require_soulweaver ))
+                        add_bucket( team, params, morale );
                     
                     team.splice( 3, 1 ); // delete 4th member
                 }
