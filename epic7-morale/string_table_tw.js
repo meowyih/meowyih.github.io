@@ -1,4 +1,3 @@
-var g_string_table_tw =
 {
     "heroes": [
         {
@@ -17,19 +16,19 @@ var g_string_table_tw =
             "Arbiter Vildred": ""
         },
         {
-            "Baal & Sezan": ""
-        },
-        {
             "Baiken": ""
         },
         {
             "Basar": ""
         },
         {
-            "Bellona": ""
+            "Baal & Sezan": ""
         },
         {
             "Blood Moon Haste": ""
+        },
+        {
+            "Bellona": ""
         },
         {
             "Briar Witch Iseria": ""
@@ -104,13 +103,13 @@ var g_string_table_tw =
             "Kayron": ""
         },
         {
-            "Krau": ""
-        },
-        {
             "Ken": ""
         },
         {
             "Kise": ""
+        },
+        {
+            "Krau": ""
         },
         {
             "Lidica": ""
@@ -275,6 +274,9 @@ var g_string_table_tw =
             "Crimson Armin": ""
         },
         {
+            "Free Spirit Tieria": ""
+        },
+        {
             "Crozet": ""
         },
         {
@@ -284,16 +286,13 @@ var g_string_table_tw =
             "Dominiel": ""
         },
         {
-            "Free Spirit Tieria": ""
+            "Fighter Maya": ""
         },
         {
             "Furious": ""
         },
         {
             "General Purrgis": ""
-        },
-        {
-            "Fighter Maya": ""
         },
         {
             "Guider Aither": ""
@@ -437,16 +436,16 @@ var g_string_table_tw =
             "Commander Lorina": ""
         },
         {
-            "Eaton": ""
-        },
-        {
-            "Elson": ""
-        },
-        {
             "Doll Maker Pearlhorizon": ""
         },
         {
             "Doris": ""
+        },
+        {
+            "Eaton": ""
+        },
+        {
+            "Elson": ""
         },
         {
             "Enott": ""
@@ -545,13 +544,13 @@ var g_string_table_tw =
             "Rima": ""
         },
         {
-            "Roozid": ""
-        },
-        {
             "Sven": ""
         },
         {
             "Taranor Guard": ""
+        },
+        {
+            "Roozid": ""
         },
         {
             "Taranor Royal Guard": ""
@@ -631,4 +630,4 @@ var g_string_table_tw =
             "Interesting Story": ""
         }
     ]
-};
+}
