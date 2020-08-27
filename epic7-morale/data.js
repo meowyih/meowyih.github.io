@@ -77,7 +77,7 @@ function initialize()
     sort_select();
 
     // TODO: translate g_heroes using external string table
-    generate_i18n_json_template();
+    // generate_i18n_json_template();
     
 } 
 
