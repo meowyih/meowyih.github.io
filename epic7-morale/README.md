@@ -2,6 +2,11 @@
 
 https://meowyih.github.io/epic7-morale/index.html
 
+localization
+
+zh_tw:
+https://meowyih.github.io/epic7-morale/index.html?lang=tw
+
 # What is this?
 
 This is a labyrinth morale tool for epic7. Actually, there are already several very good tools on internet. Most of them allow user to select several heroes as the team pool and generate the optimized team based on that pool. My tool uses different approach, which is to generate complete list based on all the heroes. It saves my time from trying different combinations.
@@ -24,8 +29,3 @@ Pull data using this tool https://meowyih.github.io/epic7-data/index.html and th
 # Known issue
 
 Epic7 database does not have Kikirat v2's camping information. So I simply remove it/him from the select list.
-
-# TODO
-
-1. For anyone who want to work on the localization, there is a external string table template 'string_table_tw.js' there. Implement it and translate the g_heroes in the initialize() function and that is all the work.
-2. A hero select filter would be nice. Personally I don't really need that, since it already generate a complete list for the specific hero I want to use.

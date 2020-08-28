@@ -1,633 +1,633 @@
 {
     "heroes": [
         {
-            "Alencia": ""
+            "Alencia": "艾蓮西雅"
         },
         {
-            "Ambitious Tywin": ""
+            "Ambitious Tywin": "野心份子泰溫"
         },
         {
-            "Apocalypse Ravi": ""
+            "Apocalypse Ravi": "末日蘿菲"
         },
         {
-            "Aramintha": ""
+            "Aramintha": "雅拉敏塔"
         },
         {
-            "Arbiter Vildred": ""
+            "Arbiter Vildred": "執行官維德瑞"
         },
         {
-            "Baiken": ""
+            "Baiken": "梅喧"
         },
         {
-            "Basar": ""
+            "Basar": "巴薩爾"
         },
         {
-            "Baal & Sezan": ""
+            "Baal & Sezan": "巴爾&塞尚"
         },
         {
-            "Blood Moon Haste": ""
+            "Blood Moon Haste": "赤月的貴族海斯特"
         },
         {
-            "Bellona": ""
+            "Bellona": "維爾蘿娜"
         },
         {
-            "Briar Witch Iseria": ""
+            "Briar Witch Iseria": "灰光森林的伊賽麗亞"
         },
         {
-            "Cecilia": ""
+            "Cecilia": "賽西莉亞"
         },
         {
-            "Celine": ""
+            "Celine": "瑟琳"
         },
         {
-            "Cerise": ""
+            "Cerise": "賽瑞絲"
         },
         {
-            "Cermia": ""
+            "Cermia": "潔若米亞"
         },
         {
-            "Charles": ""
+            "Charles": "查爾斯"
         },
         {
-            "Charlotte": ""
+            "Charlotte": "夏綠蒂"
         },
         {
-            "Chloe": ""
+            "Chloe": "克蘿愛"
         },
         {
-            "Choux": ""
+            "Choux": "小泡芙"
         },
         {
-            "Dark Corvus": ""
+            "Dark Corvus": "黑暗的科爾布思"
         },
         {
-            "Desert Jewel Basar": ""
+            "Desert Jewel Basar": "沙漠寶石巴薩爾"
         },
         {
-            "Destina": ""
+            "Destina": "戴絲蒂娜"
         },
         {
-            "Diene": ""
+            "Diene": "迪埃妮"
         },
         {
-            "Dizzy": ""
+            "Dizzy": "蒂姬"
         },
         {
-            "Elena": ""
+            "Elena": "艾蕾娜"
         },
         {
-            "Elphelt": ""
+            "Elphelt": "愛爾菲特"
         },
         {
-            "Faithless Lidica": ""
+            "Faithless Lidica": "無神論者麗迪卡"
         },
         {
-            "Fallen Cecilia": ""
+            "Fallen Cecilia": "墮落的賽西莉亞"
         },
         {
-            "Haste": ""
+            "Haste": "海斯特"
         },
         {
-            "Holiday Yufine": ""
+            "Holiday Yufine": "度假風優芬妮"
         },
         {
-            "Iseria": ""
+            "Iseria": "伊賽麗亞"
         },
         {
-            "Judge Kise": ""
+            "Judge Kise": "審判者綺世"
         },
         {
-            "Kawerik": ""
+            "Kawerik": "卡威利"
         },
         {
-            "Kayron": ""
+            "Kayron": "凱隆"
         },
         {
-            "Ken": ""
+            "Ken": "肯恩"
         },
         {
-            "Kise": ""
+            "Kise": "綺世"
         },
         {
-            "Krau": ""
+            "Krau": "克勞烏"
         },
         {
-            "Lidica": ""
+            "Lidica": "麗迪卡"
         },
         {
-            "Lilias": ""
+            "Lilias": "莉莉亞斯"
         },
         {
-            "Lilibet": ""
+            "Lilibet": "莉莉貝"
         },
         {
-            "Little Queen Charlotte": ""
+            "Little Queen Charlotte": "年輕的女王夏綠蒂"
         },
         {
-            "Ludwig": ""
+            "Ludwig": "魯特比"
         },
         {
-            "Luluca": ""
+            "Luluca": "璐璐卡"
         },
         {
-            "Luna": ""
+            "Luna": "露娜"
         },
         {
-            "Maid Chloe": ""
+            "Maid Chloe": "僕人克蘿愛"
         },
         {
-            "Martial Artist Ken": ""
+            "Martial Artist Ken": "武鬥家肯恩"
         },
         {
-            "Melissa": ""
+            "Melissa": "梅麗莎"
         },
         {
-            "Mui": ""
+            "Mui": "繆伊"
         },
         {
-            "Pavel": ""
+            "Pavel": "帕貝爾"
         },
         {
-            "Ravi": ""
+            "Ravi": "蘿菲"
         },
         {
-            "Ray": ""
+            "Ray": "雷伊"
         },
         {
-            "Remnant Violet": ""
+            "Remnant Violet": "殘影的菲奧雷托"
         },
         {
-            "Roana": ""
+            "Roana": "羅安納"
         },
         {
-            "Ruele of Light": ""
+            "Ruele of Light": "光之瑞兒"
         },
         {
-            "Sage Baal & Sezan": ""
+            "Sage Baal & Sezan": "賢者巴爾&塞尚"
         },
         {
-            "Seaside Bellona": ""
+            "Seaside Bellona": "海邊的維爾蘿娜"
         },
         {
-            "Sez": ""
+            "Sez": "賽茲"
         },
         {
-            "Sigret": ""
+            "Sigret": "賽珂蘭特"
         },
         {
-            "Silver Blade Aramintha": ""
+            "Silver Blade Aramintha": "白銀刀刃的雅拉敏塔"
         },
         {
-            "Sol": ""
+            "Sol": "索爾"
         },
         {
-            "Specimen Sez": ""
+            "Specimen Sez": "實驗體賽茲"
         },
         {
-            "Specter Tenebria": ""
+            "Specter Tenebria": "幻影的泰妮布里雅"
         },
         {
-            "Tamarinne": ""
+            "Tamarinne": "塔瑪林爾"
         },
         {
-            "Tenebria": ""
+            "Tenebria": "泰妮布里雅"
         },
         {
-            "Tywin": ""
+            "Tywin": "泰溫"
         },
         {
-            "Vildred": ""
+            "Vildred": "維德瑞"
         },
         {
-            "Violet": ""
+            "Violet": "菲奧雷托"
         },
         {
-            "Vivian": ""
+            "Vivian": "薇薇安"
         },
         {
-            "Yufine": ""
+            "Yufine": "優芬妮"
         },
         {
-            "Yuna": ""
+            "Yuna": "尤娜"
         },
         {
-            "Zeno": ""
+            "Zeno": "傑諾"
         },
         {
-            "Achates": ""
+            "Achates": "雅卡泰絲"
         },
         {
-            "Angelica": ""
+            "Angelica": "安潔莉卡"
         },
         {
-            "Armin": ""
+            "Armin": "亞敏"
         },
         {
-            "Assassin Cartuja": ""
+            "Assassin Cartuja": "殺手卡爾圖哈"
         },
         {
-            "Assassin Cidd": ""
+            "Assassin Cidd": "殺手席德"
         },
         {
-            "Assassin Coli": ""
+            "Assassin Coli": "殺手可麗"
         },
         {
-            "Auxiliary Lots": ""
+            "Auxiliary Lots": "輔助型拉茲"
         },
         {
-            "Benevolent Romann": ""
+            "Benevolent Romann": "仁慈的洛曼"
         },
         {
-            "Blaze Dingo": ""
+            "Blaze Dingo": "烈火汀果"
         },
         {
-            "Blood Blade Karin": ""
+            "Blood Blade Karin": "血劍卡琳"
         },
         {
-            "Cartuja": ""
+            "Cartuja": "卡爾圖哈"
         },
         {
-            "Celestial Mercedes": ""
+            "Celestial Mercedes": "外太空的玫勒賽德絲"
         },
         {
-            "Challenger Dominiel": ""
+            "Challenger Dominiel": "挑戰者多米妮爾"
         },
         {
-            "Champion Zerato": ""
+            "Champion Zerato": "終結者杰拉圖"
         },
         {
-            "Cidd": ""
+            "Cidd": "席德"
         },
         {
-            "Clarissa": ""
+            "Clarissa": "克萊莉莎"
         },
         {
-            "Coli": ""
+            "Coli": "可麗"
         },
         {
-            "Corvus": ""
+            "Corvus": "科爾布思"
         },
         {
-            "Crescent Moon Rin": ""
+            "Crescent Moon Rin": "新月舞姬鈴兒"
         },
         {
-            "Crimson Armin": ""
+            "Crimson Armin": "紅焰亞敏"
         },
         {
-            "Free Spirit Tieria": ""
+            "Free Spirit Tieria": "永恆不變的黛莉亞"
         },
         {
-            "Crozet": ""
+            "Crozet": "克羅澤"
         },
         {
-            "Dingo": ""
+            "Dingo": "汀果"
         },
         {
-            "Dominiel": ""
+            "Dominiel": "多米妮爾"
         },
         {
-            "Fighter Maya": ""
+            "Fighter Maya": "戰鬥型瑪雅"
         },
         {
-            "Furious": ""
+            "Furious": "尤貝烏斯"
         },
         {
-            "General Purrgis": ""
+            "General Purrgis": "大將法濟斯"
         },
         {
-            "Guider Aither": ""
+            "Guider Aither": "求道者埃德勒"
         },
         {
-            "Karin": ""
+            "Karin": "卡琳"
         },
         {
-            "Khawana": ""
+            "Khawana": "卡瓦娜"
         },
         {
-            "Khawazu": ""
+            "Khawazu": "卡瓦朱"
         },
         {
-            "Kitty Clarissa": ""
+            "Kitty Clarissa": "貓咪克萊莉莎"
         },
         {
-            "Kizuna AI": ""
+            "Kizuna AI": "絆愛"
         },
         {
-            "Leo": ""
+            "Leo": "雷歐"
         },
         {
-            "Lots": ""
+            "Lots": "拉茲"
         },
         {
-            "Maya": ""
+            "Maya": "瑪雅"
         },
         {
-            "Mercedes": ""
+            "Mercedes": "玫勒賽德絲"
         },
         {
-            "Purrgis": ""
+            "Purrgis": "法濟斯"
         },
         {
-            "Rin": ""
+            "Rin": "鈴兒"
         },
         {
-            "Roaming Warrior Leo": ""
+            "Roaming Warrior Leo": "流浪勇士雷歐"
         },
         {
-            "Romann": ""
+            "Romann": "洛曼"
         },
         {
-            "Rose": ""
+            "Rose": "蘿季"
         },
         {
-            "Schuri": ""
+            "Schuri": "修里"
         },
         {
-            "Serila": ""
+            "Serila": "塞麗拉"
         },
         {
-            "Shadow Rose": ""
+            "Shadow Rose": "暗影蘿季"
         },
         {
-            "Shooting Star Achates": ""
+            "Shooting Star Achates": "流星雅卡泰絲"
         },
         {
-            "Silk": ""
+            "Silk": "席可"
         },
         {
-            "Sinful Angelica": ""
+            "Sinful Angelica": "罪戾的安潔莉卡"
         },
         {
-            "Surin": ""
+            "Surin": "蘇琳"
         },
         {
-            "Tempest Surin": ""
+            "Tempest Surin": "風雲蘇琳"
         },
         {
-            "Troublemaker Crozet": ""
+            "Troublemaker Crozet": "不法之徒克羅澤"
         },
         {
-            "Wanderer Silk": ""
+            "Wanderer Silk": "流浪者席可"
         },
         {
-            "Watcher Schuri": ""
+            "Watcher Schuri": "注視者修里"
         },
         {
-            "Zerato": ""
+            "Zerato": "杰拉圖"
         },
         {
-            "Adlay": ""
+            "Adlay": "亞迪賴"
         },
         {
-            "Adventurer Ras": ""
+            "Adventurer Ras": "冒險家拉斯"
         },
         {
-            "Ains": ""
+            "Ains": "艾因茲"
         },
         {
-            "Aither": ""
+            "Aither": "埃德勒"
         },
         {
-            "Alexa": ""
+            "Alexa": "雅莉莎"
         },
         {
-            "All-Rounder Wanda": ""
+            "All-Rounder Wanda": "疑難雜症專家汪達"
         },
         {
-            "Angelic Montmorancy": ""
+            "Angelic Montmorancy": "守護天使蒙茉朗西"
         },
         {
-            "Arowell": ""
+            "Arowell": "雅洛薇"
         },
         {
-            "Azalea": ""
+            "Azalea": "亞潔理亞"
         },
         {
-            "Bask": ""
+            "Bask": "巴思克"
         },
         {
-            "Batisse": ""
+            "Batisse": "巴托斯"
         },
         {
-            "Butcher Corps Inquisitor": ""
+            "Butcher Corps Inquisitor": "屠殺部隊員"
         },
         {
-            "Captain Rikoris": ""
+            "Captain Rikoris": "先鋒隊長里科黎司"
         },
         {
-            "Carmainerose": ""
+            "Carmainerose": "卡麥蘿茲"
         },
         {
-            "Carrot": ""
+            "Carrot": "卡蘿"
         },
         {
-            "Celeste": ""
+            "Celeste": "賽雷斯特"
         },
         {
-            "Chaos Inquisitor": ""
+            "Chaos Inquisitor": "混沌教屠殺追擊者"
         },
         {
-            "Chaos Sect Axe": ""
+            "Chaos Sect Axe": "混沌教巨斧大將軍"
         },
         {
-            "Church of Ilryos Axe": ""
+            "Church of Ilryos Axe": "伊利歐斯教斧兵"
         },
         {
-            "Commander Lorina": ""
+            "Commander Lorina": "指揮官蘿里娜"
         },
         {
-            "Doll Maker Pearlhorizon": ""
+            "Doll Maker Pearlhorizon": "製偶師波蘿萊珍"
         },
         {
-            "Doris": ""
+            "Doris": "朵莉思"
         },
         {
-            "Eaton": ""
+            "Eaton": "伊頓"
         },
         {
-            "Elson": ""
+            "Elson": "艾爾森"
         },
         {
-            "Enott": ""
+            "Enott": "艾諾特"
         },
         {
-            "Falconer Kluri": ""
+            "Falconer Kluri": "鷹獵人可露莉"
         },
         {
-            "Gloomyrain": ""
+            "Gloomyrain": "格魯美蘭"
         },
         {
-            "Gunther": ""
+            "Gunther": "坤特"
         },
         {
-            "Hataan": ""
+            "Hataan": "哈坦"
         },
         {
-            "Hazel": ""
+            "Hazel": "海茲"
         },
         {
-            "Helga": ""
+            "Helga": "赫爾嘉"
         },
         {
-            "Hurado": ""
+            "Hurado": "修拉杜"
         },
         {
-            "Jecht": ""
+            "Jecht": "傑克托"
         },
         {
-            "Jena": ""
+            "Jena": "捷娜"
         },
         {
-            "Judith": ""
+            "Judith": "茱迪絲"
         },
         {
-            "Kikirat v2": ""
+            "Kikirat v2": "奇奇拉特V.2"
         },
         {
-            "Kiris": ""
+            "Kiris": "奇麗絲"
         },
         {
-            "Kluri": ""
+            "Kluri": "可露莉"
         },
         {
-            "Lena": ""
+            "Lena": "雷娜"
         },
         {
-            "Lorina": ""
+            "Lorina": "蘿里娜"
         },
         {
-            "Mascot Hazel": ""
+            "Mascot Hazel": "吉祥物海茲"
         },
         {
-            "Mercenary Helga": ""
+            "Mercenary Helga": "自由自在的傭兵赫爾嘉"
         },
         {
-            "Mirsa": ""
+            "Mirsa": "米勒莎"
         },
         {
-            "Mistychain": ""
+            "Mistychain": "美絲緹彩"
         },
         {
-            "Montmorancy": ""
+            "Montmorancy": "蒙茉朗西"
         },
         {
-            "Mucacha": ""
+            "Mucacha": "穆卡察"
         },
         {
-            "Nemunas": ""
+            "Nemunas": "尼姆拉斯"
         },
         {
-            "Otillie": ""
+            "Otillie": "奧緹莉爾"
         },
         {
-            "Pearlhorizon": ""
+            "Pearlhorizon": "波蘿萊珍"
         },
         {
-            "Pyllis": ""
+            "Pyllis": "費莉絲"
         },
         {
-            "Ras": ""
+            "Ras": "拉斯"
         },
         {
-            "Requiemroar": ""
+            "Requiemroar": "雷奎姆洛"
         },
         {
-            "Researcher Carrot": ""
+            "Researcher Carrot": "研究者卡蘿"
         },
         {
-            "Righteous Thief Roozid": ""
+            "Righteous Thief Roozid": "義賊魯茲德"
         },
         {
-            "Rikoris": ""
+            "Rikoris": "里科黎司"
         },
         {
-            "Rima": ""
+            "Rima": "黎瑪"
         },
         {
-            "Sven": ""
+            "Sven": "史賓"
         },
         {
-            "Taranor Guard": ""
+            "Taranor Guard": "塔拉諾爾禁衛隊員"
         },
         {
-            "Roozid": ""
+            "Roozid": "魯茲德"
         },
         {
-            "Taranor Royal Guard": ""
+            "Taranor Royal Guard": "塔拉諾爾王宮士兵"
         },
         {
-            "Tieria": ""
+            "Tieria": "黛莉亞"
         },
         {
-            "Wanda": ""
+            "Wanda": "汪達"
         }
     ],
     "topics": [
         {
-            "Criticism": ""
+            "Criticism": "批判世界"
         },
         {
-            "Reality Check": ""
+            "Reality Check": "正視現實"
         },
         {
-            "Heroic Tale": ""
+            "Heroic Tale": "英雄故事"
         },
         {
-            "Comforting Cheer": ""
+            "Comforting Cheer": "安慰助陣"
         },
         {
-            "Cute Cheer": ""
+            "Cute Cheer": "撒嬌助陣"
         },
         {
-            "Heroic Cheer": ""
+            "Heroic Cheer": "英雄式助陣"
         },
         {
-            "Sad Memory": ""
+            "Sad Memory": "傷心回憶"
         },
         {
-            "Joyful Memory": ""
+            "Joyful Memory": "愉快回憶"
         },
         {
-            "Happy Memory": ""
+            "Happy Memory": "幸福回憶"
         },
         {
-            "Unique Comment": ""
+            "Unique Comment": "4次元的發言"
         },
         {
-            "Self-Indulgent": ""
+            "Self-Indulgent": "自我陶醉"
         },
         {
-            "Occult": ""
+            "Occult": "秘術"
         },
         {
-            "Myth": ""
+            "Myth": "神話"
         },
         {
-            "Bizarre Story": ""
+            "Bizarre Story": "獵奇的故事"
         },
         {
-            "Food Story": ""
+            "Food Story": "食物故事"
         },
         {
-            "Horror Story": ""
+            "Horror Story": "恐怖故事"
         },
         {
-            "Gossip": ""
+            "Gossip": "八卦"
         },
         {
-            "Dream": ""
+            "Dream": "夢"
         },
         {
-            "Advice": ""
+            "Advice": "煩惱諮詢"
         },
         {
-            "Complain": ""
+            "Complain": "耍賴"
         },
         {
-            "Belief": ""
+            "Belief": "信念"
         },
         {
-            "Interesting Story": ""
+            "Interesting Story": "冒險故事"
         }
     ]
 }
