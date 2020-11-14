@@ -560,7 +560,17 @@
         },
         {
             "Wanda": "汪達"
-        }
+        },
+        {"Ervalen": "Ervalen"},
+        {"Landy": "Landy"},
+            {"Last Rider Krau": "Last Rider Krau"},
+                {"Top Model Luluca": "Top Model Luluca"},
+                    {"Ainos": "Ainos"},
+                        {"Magic Scholar Doris": "Magic Scholar Doris"},
+                            {"Godmother": "Godmother"},
+                                {"Ian": "Ian"},
+                                    {"Glenn": "Glenn"},
+                                        {"Sonia": "Sonia"}
     ],
     "topics": [
         {
