@@ -984,7 +984,7 @@ function calcScore( enc_time ) {
 		
 		// the maximum substate for lv85 speed could be 5, but it extremely rare.
 		// so we use 4 as maximum to calculate the score 
-		if (( getGearLevel() === "85" || getGearLevel === "90r" ) && idx === 7 ) {
+		if (( getGearLevel() === "85" || getGearLevel() === "90r" ) && idx === 7 ) {
 			substat_max_tmp = 4;
 		}
 		else {
@@ -1212,7 +1212,7 @@ function report( enc_time, score ) {
 			// the maximum substate for lv85 speed could be 5, but it extremely rare.
 			// so we use 4 as maximum for the report
 			var substat_max_tmp = substat_max[valid_data_type[idx]];
-			if (( getGearLevel() === "85" || getGearLevel === "90r" ) && valid_data_type[idx] === 7 ) {
+			if (( getGearLevel() === "85" || getGearLevel() === "90r" ) && valid_data_type[idx] === 7 ) {
 				substat_max_tmp = 4;
 			}
 
@@ -1247,7 +1247,7 @@ function report( enc_time, score ) {
 			// the maximum substate for lv85 speed could be 5, but it extremely rare.
 			// so we use 4 as maximum for the report
             var substat_max_tmp = substat_max[valid_data_type[idx]];
-            if (( getGearLevel() === "85" || getGearLevel === "90r" ) && valid_data_type[idx] === 7 ) {
+            if (( getGearLevel() === "85" || getGearLevel() === "90r" ) && valid_data_type[idx] === 7 ) {
 				substat_max_tmp = 4;
 			}
             
@@ -1282,7 +1282,7 @@ function report( enc_time, score ) {
 			// the maximum substate for lv85 speed could be 5, but it extremely rare.
 			// so we use 4 as maximum for the report
 			var substat_max_tmp = substat_max[valid_data_type[idx]];
-			if (( getGearLevel() === "85" || getGearLevel === "90r" ) && valid_data_type[idx] === 7 ) {
+			if (( getGearLevel() === "85" || getGearLevel() === "90r" ) && valid_data_type[idx] === 7 ) {
 				substat_max_tmp = 4;
 			}
 
